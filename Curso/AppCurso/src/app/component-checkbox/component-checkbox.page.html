@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Checkbox
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <h2>Padrão</h2>
+    <ion-item>
+      <ion-label>Default</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <h2>Desativado</h2>
+    <ion-item>
+      <ion-label>Disabled</ion-label>
+      <ion-checkbox disabled="true"></ion-checkbox>
+    </ion-item>
+    <h2>Já marcado</h2>
+    <ion-item>
+      <ion-label>Checked</ion-label>
+      <ion-checkbox checked="true"></ion-checkbox>
+    </ion-item>
+    <h2>Desabilitado e já marcado</h2>
+    <ion-item>
+      <ion-label>Disabled + Checked</ion-label>
+      <ion-checkbox disabled="true" checked="true"></ion-checkbox>
+    </ion-item>
+    <h2>Check no inicio</h2>
+    <ion-item>
+        <ion-label>Start</ion-label>
+        <ion-checkbox slot="start"></ion-checkbox>
+    </ion-item>
+    <h2>Check com cores</h2>
+    <ion-item>
+      <ion-label>Primary</ion-label>
+      <ion-checkbox color="primary"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Secondary</ion-label>
+      <ion-checkbox color="secondary"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Danger</ion-label>
+      <ion-checkbox color="danger"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Light</ion-label>
+      <ion-checkbox color="ligth"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dark</ion-label>
+      <ion-checkbox color="dark"></ion-checkbox>
+    </ion-item>
+    <h3>Meses</h3>
+    <!-- para nao ter q ficar escrevendo um a um é mais facil colocar um loop e definir no ts os meses -->
+    <ion-list>
+      <ion-item *ngFor="let mes of meses">
+          <ion-label>{{mes.nome}}</ion-label>
+          <ion-checkbox checked="{{mes.marcado}}" [(ngModel)]="mes.marcado"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="exibirMeses()">Exibir meses marcardos</ion-button>
+  
+  </ion-content>

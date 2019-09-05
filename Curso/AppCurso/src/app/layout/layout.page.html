@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Layout
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+      <!-- 
+        atributos do botão:
+        color="" (primary, secundary, success, warning,danger,light,medium,dark...) alem das cores normais (black, white, red...)
+        expand="" (full, block)
+        shape="" (round)
+        fill="" (outline)
+        size="" (small, large)
+      -->
+      <!-- como estamos usando o angular a função é chamada com o (click)="nomedafuncao('nomedaparametro')" que esta no layout.page.ts  -->
+      <!-- pode ser uma função só e passar por parametro ou criar uma pra cada -->
+      <!--  (click)="abrirLayoutHeadereFooter()" -->
+      <ion-button expand="full" (click)="abrirPagina('1')">Header e Footer</ion-button>
+    
+      <ion-button expand="full" (click)="abrirPagina('2')">Tabs</ion-button>
+      
+      <ion-button expand="full" (click)="abrirPagina('3')">Menu</ion-button>
+      
+      <ion-button expand="full" (click)="abrirPagina('4')">Split Pane</ion-button>
+    
+      <ion-button expand="full" (click)="abrirPagina('5')">Grid</ion-button>
+      
+      <ion-button expand="full" (click)="abrirPagina('6')">CSS Utilities</ion-button>
+      
+</ion-content>

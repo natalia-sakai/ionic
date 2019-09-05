@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Layout - Tabs
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+  <!-- 
+    tabs são as abas 
+    mais em: https://ionicframework.com/docs/api/tabs
+  -->
+<ion-tabs>
+    <!-- nome da tab tipo a div -->
+    <ion-tab-bar slot="bottom"> 
+        <!-- nome do botao -->
+      <ion-tab-button tab="schedule">
+          <!-- icone -->
+        <ion-icon name="calendar"></ion-icon>
+        <!-- label -->
+        <ion-label>Schedule</ion-label>
+        <!-- notificação -->
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="speakers">
+        <ion-icon name="contacts"></ion-icon>
+        <ion-label>Speakers</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Map</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-content>

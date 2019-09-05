@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Searchbar
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <!-- Default Searchbar -->
+    <!-- ngModel é responsável por atualizar a variavel nome -->
+    <h2>Pesquisa com dados</h2>
+    <ion-searchbar [(ngModel)]="nome" (ionInput)="filtrarItens()"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let pessoa of pessoasFiltradas">
+        {{pessoa.nome}}
+      </ion-item>
+    </ion-list>
+  
+    <h2>Pesquisa com cor</h2>
+    <!-- usando nosso tema -->
+    <ion-searchbar color="danger"></ion-searchbar>
+  
+    <h2>Pesquisa com valor</h2>
+    <!-- Iniciar com valor -->
+    <ion-searchbar value="Ionic"></ion-searchbar>
+    
+    <h2>Pesquisa com tipos de teclado</h2>
+    <!-- Tipos de teclados diferentes -->
+    <ion-searchbar type="tel"></ion-searchbar>
+    
+    <h2>Pesquisa com cancelamento</h2>
+    <!-- Com opção de cancelamento customizado -->
+    <ion-searchbar showCancelButton cancelButtonText="Cancelar operação"></ion-searchbar>
+    
+    <h2>Pesquisa com animação</h2>
+    <ion-searchbar animated placeholder="Buscar" mode="ios"></ion-searchbar>
+    
+    <h2>Pesquisa no IOS</h2>
+    <ion-searchbar mode="ios"></ion-searchbar>
+    
+    <h2>Pesquisa</h2>
+    <ion-toolbar>
+        <ion-searchbar></ion-searchbar>
+      </ion-toolbar>
+  </ion-content>
