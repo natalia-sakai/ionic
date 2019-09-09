@@ -1,3 +1,4 @@
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,11 +10,11 @@ export class ComponentNativeTexttospeechPage implements OnInit {
 
   textoASerFalado : string = 'Olá mundo';
   
-  constructor(private tts : ComponentNativeTexttospeechPage) { }
+  constructor(private tts : TextToSpeech) { }
 
   ngOnInit() {
   }
-  /*
+  
   falar(){
     this.tts.speak({
       text : this.textoASerFalado,
@@ -26,5 +27,5 @@ export class ComponentNativeTexttospeechPage implements OnInit {
     .catch((erro : any)=>{
       alert(erro);
     })
-  }*/
+  }
 }

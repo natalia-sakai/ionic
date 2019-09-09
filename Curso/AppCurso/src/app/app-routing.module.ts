@@ -158,7 +158,8 @@ const routes: Routes = [
   { path: 'animacoes', loadChildren: './animacoes/animacoes.module#AnimacoesPageModule' },
   { path: 'componentes-nativos', loadChildren: './componentes-nativos/componentes-nativos.module#ComponentesNativosPageModule' },
   { path: 'component-native-camera', loadChildren: './component-native-camera/component-native-camera.module#ComponentNativeCameraPageModule' },
-  { path: 'component-native-texttospeech', loadChildren: './component-native-texttospeech/component-native-texttospeech.module#ComponentNativeTexttospeechPageModule' }
+  { path: 'component-native-texttospeech', loadChildren: './component-native-texttospeech/component-native-texttospeech.module#ComponentNativeTexttospeechPageModule' },
+  { path: 'component-native-flash', loadChildren: './component-native-flash/component-native-flash.module#ComponentNativeFlashPageModule' }
 ];
 
 

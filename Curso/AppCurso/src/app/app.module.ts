@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +28,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     StatusBar,
     SplashScreen,
     Camera,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    TextToSpeech,
+    Flashlight
   ],
   bootstrap: [AppComponent]
 })
