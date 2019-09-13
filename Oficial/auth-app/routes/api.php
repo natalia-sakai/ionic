@@ -15,7 +15,6 @@ Route::group([
     function() {
         Route::get('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
-        Route::get('adm','Auth\AuthController@adm');
     });
 });
 

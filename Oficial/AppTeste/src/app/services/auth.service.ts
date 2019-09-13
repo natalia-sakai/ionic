@@ -16,21 +16,17 @@ export class AuthService {
 
   //variaveis
   
-  isLoggedIn;
+  isLoggedIn = false;
   token:any;
-
   constructor(
     private http: HttpClient,
-    private storage: NativeStorage, 
-    /* storage é um modulo de armazenamento local */
-    private env: EnvService, //para pegar a url
+    private storage: NativeStorage,
+    private env: EnvService,
   ) { }
-  
   login(email: String, password: String) {
     return this.http.post(this.env.API_URL + 'auth/login',
       {email: email, password: password}
-    )
-    .pipe(
+    ).pipe(
       tap(token => {
         this.storage.setItem('token', token)
         .then(
@@ -45,14 +41,11 @@ export class AuthService {
       }),
     );
   }
-
-  register(fName: String, lName: String, email: String, password: String, type: number) {
+  register(fName: String, lName: String, email: String, password: String) {
     return this.http.post(this.env.API_URL + 'auth/register',
-      {fName: fName, lName: lName, email: email, password: password, type: type}
+      {fName: fName, lName: lName, email: email, password: password}
     )
-
   }
-
   logout() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
@@ -65,10 +58,8 @@ export class AuthService {
         delete this.token;
         return data;
       })
-
     )
   }
-
   user() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
@@ -76,12 +67,10 @@ export class AuthService {
     return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
     .pipe(
       tap(user => {
-        this.isLoggedIn = true;
         return user;
       })
     )
   }
-
   getToken() {
     return this.storage.getItem('token').then(
       data => {
@@ -94,21 +83,10 @@ export class AuthService {
       },
       error => {
         this.token = null;
-        this.isLoggedIn=false; //--> é esse,
-        //this.isLoggedIn=true; //--> para teste
+        //this.isLoggedIn=false; //--> é esse
+        this.isLoggedIn=true; //--> teste
       }
     );
   }
-  senha:any;
-  verifica(senha_adm: String){
-    const headers = new HttpHeaders({
-      'Authorization': this.senha['senha_adm']
-    });
-    return this.http.get(this.env.API_URL + 'auth/adm',{ headers: headers })
-    .pipe(
-      tap( senha=>{
-        return senha;
-      })
-    )
-  }
+
 }

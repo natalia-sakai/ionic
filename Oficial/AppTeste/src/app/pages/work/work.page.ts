@@ -1,38 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, ToastController, AlertController, ActionSheetController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
+import { MenuController, ToastController, AlertController, ActionSheetController } from '@ionic/angular';
+import { User } from './../../models/user';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  selector: 'app-work',
+  templateUrl: './work.page.html',
+  styleUrls: ['./work.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class WorkPage implements OnInit {
 
   user: User;
   tasks: any[] = [];
-  
-  constructor(private menu: MenuController, private authService: AuthService, private toastCtrl : ToastController, private alertCtrl : AlertController, private actionSheetCtrl : ActionSheetController) { 
+
+  constructor(private menu: MenuController, private authService: AuthService, private toastCtrl : ToastController, private alertCtrl : AlertController, private actionSheetCtrl : ActionSheetController) {
     this.menu.enable(true);
     let tasksJson = localStorage.getItem('taskbd');
     if(tasksJson != null){
       this.tasks = JSON.parse(tasksJson)
     }
-  }
+   }
+
   ngOnInit() {
-    
   }
   
-
   async abrirTeste()
   {
     let alertTeste = await this.alertCtrl.create({
-      header: 'Teste de valor',
+      header: 'Adicionar tarefa',
       inputs: [
         {
           name: 'taskToDo',
           type: 'text',
-          placeholder: 'Informe algo'
+          placeholder: 'tarefa a fazer'
         }
       ],
       buttons: [
@@ -61,7 +61,7 @@ export class DashboardPage implements OnInit {
     // se nao tiver valor
     if(taskToDo.trim().length <1){
       const toast = await this.toastCtrl.create({
-        message: 'Informe algo!',
+        message: 'Digite alguma informação!',
         duration: 2000,
         position: 'top'
       });
@@ -106,5 +106,4 @@ export class DashboardPage implements OnInit {
     this.tasks = this.tasks.filter(taskArray => task != taskArray);
     this.updateLocalStorage();
   }
-  
 }

@@ -8,7 +8,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'home', 
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
@@ -159,7 +159,8 @@ const routes: Routes = [
   { path: 'componentes-nativos', loadChildren: './componentes-nativos/componentes-nativos.module#ComponentesNativosPageModule' },
   { path: 'component-native-camera', loadChildren: './component-native-camera/component-native-camera.module#ComponentNativeCameraPageModule' },
   { path: 'component-native-texttospeech', loadChildren: './component-native-texttospeech/component-native-texttospeech.module#ComponentNativeTexttospeechPageModule' },
-  { path: 'component-native-flash', loadChildren: './component-native-flash/component-native-flash.module#ComponentNativeFlashPageModule' }
+  { path: 'component-native-flash', loadChildren: './component-native-flash/component-native-flash.module#ComponentNativeFlashPageModule' },
+  { path: 'inicial', loadChildren: './app/inicial/inicial.module#InicialPageModule' }
 ];
 
 

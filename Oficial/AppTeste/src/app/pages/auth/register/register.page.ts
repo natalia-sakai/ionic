@@ -14,7 +14,9 @@ import { async } from 'q';
 export class RegisterPage implements OnInit {
 
   aux: number;
-
+  selected: any;
+  changed: any;
+  valued: number;
   constructor(private modalCtrl: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,
@@ -29,7 +31,6 @@ export class RegisterPage implements OnInit {
   dismissRegister() {
     this.modalCtrl.dismiss();
   }
-
   // On Login button tap, dismiss Register modal and open login Modal
   async loginModal() {
     this.dismissRegister();
@@ -38,29 +39,20 @@ export class RegisterPage implements OnInit {
     });
     return await loginModal.present();
   }
-
-  /*função para pegar o form*/
+  
   register(form: NgForm) {
-    //se for adm pede senha especial
-    while(form.value.type == 0)
+    if(form.value.password != form.value.password_s)
     {
-      this.adm_confirmate();
-      if(this.aux == null || this.aux == 0)
-      {
-        form.value.type = 1;
-      }
+      this.alertService.presentToast("Senha incorreta!");
+      
     }
-    while(form.value.password != form.value.password_s)
-    {
-      this.alertService.presentToast('Senhas não correspondentes!');
-    }
-    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, form.value.type).subscribe(
+    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
       data => {
         this.authService.login(form.value.email, form.value.password).subscribe(
           data => {
           },
           error => {
-            this.alertService.presentToast(data['error']);
+            console.log(error);
           },
           () => {
             this.dismissRegister();
@@ -70,7 +62,7 @@ export class RegisterPage implements OnInit {
         this.alertService.presentToast(data['message']);
       },
       error => {
-        this.alertService.presentToast('Verifique se você preencheu todos os campos ou se o E-mail já está cadastrado');
+        console.log(error);
       },
       () => {
         
@@ -78,48 +70,4 @@ export class RegisterPage implements OnInit {
     );
   }
 
-  async adm_confirmate()
-    {
-      let alertTeste = await this.alertCtrl.create({
-        header: 'Informe a senha de administrador',
-        inputs: [
-          {
-            name: 'senha_adm',
-            type: 'text',
-            placeholder: 'Password'
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancelar',
-            //role cancel deixa ele como segunda opcao
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler:()=>{
-            }
-          },
-          {
-            text: 'Ok',
-            handler: (form)=> {
-              this.authService.verifica(form.senha_adm).subscribe(
-                data => {
-                  this.alertService.presentToast('Bem-vindo chefe!');
-                  this.aux = 1;
-                  return this.aux;
-                },
-                error =>{
-                  this.alertService.presentToast('Senha incorreta!');
-                  this.aux =0;
-                  return this.aux;
-                },
-                () => {
-                  
-                }
-              );
-            }
-          }
-        ]
-      });
-      await alertTeste.present();
-    }
 }
