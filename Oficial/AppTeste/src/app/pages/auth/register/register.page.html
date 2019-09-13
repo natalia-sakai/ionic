@@ -1,0 +1,44 @@
+<ion-content padding>
+    <ion-button fill='clear' (click)="dismissRegister()" style="color: white">
+      <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+      Back
+    </ion-button>
+  <form #form="ngForm" (ngSubmit)="register(form)" method="POST">
+    <ion-item style="border-radius: 15px">
+        <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[a-z\s]+$" required="true" ></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel name="lName" placeholder="Last Name" type="text" pattern="[a-z\s]+$" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input type="email" ngModel name="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input type="password" ngModel name="password" placeholder="Password" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input type="password" ngModel name="password_s" placeholder="Confirm password" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-list style="border-radius: 15px"  lines="none">
+      <ion-radio-group ngModal name='type' allow-empty-selection="true" (ionChange)="change($event)">
+        <ion-item style="float:left">
+            <ion-radio value="1"></ion-radio>
+            <ion-label style="margin-left: 5px">Funcionário</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio value="0"></ion-radio>
+          <ion-label style="margin-left: 5px">Admininstrador</ion-label>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <br>
+    <ion-button type="submit" round expand="block" color="danger">Register</ion-button>
+  </form>
+  <p text-center style="color:white">Already have a account?</p>
+  <ion-button round expand="block" color="primary" (click)="loginModal()">Login</ion-button>
+</ion-content>

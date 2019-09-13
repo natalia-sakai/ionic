@@ -38,11 +38,25 @@ export class AppComponent {
       icon: 'filing'
     },
     {
+      title: 'Componentes Nativos',
+      url: '/componentes-nativos',
+      icon: 'phone-portrait'
+    },
+    {
       title: 'Lista de tarefas',
       url: '/lista-tarefas',
       icon: 'list-box'
+    },
+    {
+      title: 'API externa',
+      url: '/api-externa',
+      icon: 'wifi'
+    },
+    {
+      title: 'Animações',
+      url: '/animacoes',
+      icon: 'color-palette'
     }
-
   ];
 
   constructor(
