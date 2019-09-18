@@ -6,4 +6,6 @@ import { Injectable } from '@angular/core';
 export class InformativoService {
 
   constructor() { }
+
+  /*Mostra os informativos do banco de dados */
 }

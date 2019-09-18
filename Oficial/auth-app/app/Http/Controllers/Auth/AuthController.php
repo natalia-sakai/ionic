@@ -38,8 +38,7 @@ class AuthController extends Controller
             'fName' => 'required|string',
             'lName' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'type' => 'required|number'
+            'password' => 'required|string'
         ]);
         
         $user = new User;
@@ -47,7 +46,6 @@ class AuthController extends Controller
         $user->last_name = $request->lName;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->type=$request->type;
         $user->save();
         return response()->json([
             'message' => 'Usuário criado com sucesso!'
@@ -70,10 +68,5 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
-    }
-
-    public function adm(Request $request)
-    {
-        return response()->json($request->adm());
     }
 }

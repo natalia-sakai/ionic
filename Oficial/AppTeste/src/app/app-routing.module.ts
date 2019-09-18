@@ -11,7 +11,10 @@ const routes: Routes = [
   { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
   { path: 'register', loadChildren: './pages/auth/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
-  { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', canActivate: [AuthGuard] }
+  { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', canActivate: [AuthGuard] },
+  { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' },
+  { path: 'work', loadChildren: './pages/work/work.module#WorkPageModule' },
+  { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule' }
 ];
 
 @NgModule({

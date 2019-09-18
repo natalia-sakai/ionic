@@ -56,7 +56,13 @@ export class AppComponent {
       title: 'Animações',
       url: '/animacoes',
       icon: 'color-palette'
+    },
+    {
+      title: 'Inicio',
+      url: 'inicial',
+      icon: 'add-circle-outline'
     }
+
   ];
 
   constructor(

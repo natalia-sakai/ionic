@@ -16,6 +16,21 @@ export class AppComponent {
       title: 'Home',
       url: '/dashboard',
       icon: 'home'
+    },
+    {
+      title: 'Work to do',
+      url: '/work',
+      icon: 'list-box'
+    },
+    {
+      title: 'Financeiro',
+      url: '/financeiro',
+      icon: 'cash'
+    },
+    {
+      title: 'My account',
+      url: '/account',
+      icon: 'contact'
     }
   ];
 
