@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\User;
+use App\ListaPresenca;
+use App\Reuniao;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,6 +34,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
     }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -69,4 +72,55 @@ class AuthController extends Controller
     {
         return response()->json($request->user());
     }
+
+    public function listapresenca(Request $request)
+    {
+        $request->validate([
+            'id_user' => 'required|int',
+            'presenca' => 'required|boolean',
+        ]);
+        $presenca = new ListaPresenca;
+        $presenca -> id_user = $request->id_user;
+        $presenca -> presenca = $request->presenca;
+        $presenca->save();
+        return response()->json([
+            'message' => 'Lista de presença atualizada!'
+        ], 201);
+    }
+
+    public function reuniao(Request $request)
+    {
+        $request->validate([
+            'data' => 'required|date'
+        ]);
+        $reuniao = new Reuniao;
+        $reuniao -> data = $request->data;
+        $reuniao->save();
+        return response()->json([
+            'message' => 'Reuniao criada!'
+        ], 201);
+    }
+
+    public function getid()
+    {
+        $userInfo=auth('api')->user();
+        return response()->json($userInfo->id);
+    }
+
+    public function getreuniao()
+    {
+        $reuniao = DB::select('select data from reuniao where ativo = 1');
+        return $reuniao;
+    }
 }
+
+/*
+É possivel fazer:
+public function index()
+{
+    $users = DB::select('select * from users where active = ?', [1]);
+
+    return view('user.index', ['users' => $users]);
+}
+
+*/

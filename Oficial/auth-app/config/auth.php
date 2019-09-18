@@ -70,6 +70,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'lista_presenca' => [
+            'driver'=>'eloquent',
+            'model'=> App\ListaPresenca::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

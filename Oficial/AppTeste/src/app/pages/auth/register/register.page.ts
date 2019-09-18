@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { IfStmt } from '@angular/compiler';
-import { async } from 'q';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -14,9 +13,6 @@ import { async } from 'q';
 export class RegisterPage implements OnInit {
 
   aux: number;
-  selected: any;
-  changed: any;
-  valued: number;
   constructor(private modalCtrl: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,

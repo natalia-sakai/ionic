@@ -18,34 +18,52 @@ export class AuthService {
   
   isLoggedIn = false;
   token:any;
+  id:any;
+  date:any;
+
   constructor(
     private http: HttpClient,
     private storage: NativeStorage,
     private env: EnvService,
   ) { }
+
   login(email: String, password: String) {
-    return this.http.post(this.env.API_URL + 'auth/login',
+    return this.http.post(this.env.API_URL + 'auth/login', 
       {email: email, password: password}
     ).pipe(
       tap(token => {
         this.storage.setItem('token', token)
         .then(
           () => {
-            console.log('Token Stored');
+            console.log('Token armazenado');
           },
-          error => console.error('Error storing item', error)
+          error => console.error('Erro ao armazenar o Token', error)
         );
         this.token = token;
         this.isLoggedIn = true;
         return token;
       }),
+      tap(id =>{
+        this.storage.setItem('id', JSON.stringify(this.id))
+        .then(
+          () => {
+            console.log('ID armazenado');
+          },
+          error => console.error('Erro ao armazenar o ID', error)
+        );
+
+        this.id = id;
+        return id;
+      })
     );
   }
+
   register(fName: String, lName: String, email: String, password: String) {
     return this.http.post(this.env.API_URL + 'auth/register',
       {fName: fName, lName: lName, email: email, password: password}
     )
   }
+
   logout() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
@@ -60,6 +78,7 @@ export class AuthService {
       })
     )
   }
+
   user() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
@@ -71,6 +90,20 @@ export class AuthService {
       })
     )
   }
+  
+  getId()
+  {
+   return this.storage.getItem('id').then(
+    data => {
+      this.id = data;
+      return this.id;
+    },
+    error => {
+      console.log(error);
+    }
+   )
+  }
+
   getToken() {
     return this.storage.getItem('token').then(
       data => {
@@ -84,8 +117,19 @@ export class AuthService {
       error => {
         this.token = null;
         //this.isLoggedIn=false; //--> é esse
-        this.isLoggedIn=true; //--> teste
+        this.isLoggedIn=true; 
       }
+    );
+  }
+
+  getReuniao(){
+    //return this.http.get(this.env.API_URL+'auth/getreuniao');
+  }
+
+  confirma_presenca(id_user: Number, resp: Number)
+  {
+    return this.http.post(this.env.API_URL + 'auth/listapresenca',
+      {id_user: id_user, presenca: resp}
     );
   }
 

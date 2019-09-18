@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', canActivate: [AuthGuard] },
   { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' },
   { path: 'work', loadChildren: './pages/work/work.module#WorkPageModule' },
-  { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule' }
+  { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule' },
+  { path: 'logout', loadChildren: './pages/auth/logout/logout.module#LogoutPageModule' }
 ];
 
 @NgModule({

@@ -31,7 +31,13 @@ export class AppComponent {
       title: 'My account',
       url: '/account',
       icon: 'contact'
+    },
+    {
+      title: 'Logout',
+      url: '/logout',
+      icon: 'log-out'
     }
+
   ];
 
   constructor(
@@ -54,18 +60,5 @@ export class AppComponent {
 
     });
   }
-   // When Logout Button is pressed 
-   logout() {
-    this.authService.logout().subscribe(
-      data => {
-        this.alertService.presentToast(data['message']);        
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.navCtrl.navigateRoot('/landing');
-      }
-    );
-  }
+
 }
