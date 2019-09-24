@@ -26,15 +26,13 @@
       <ion-card-title>Informativos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-          <ion-list>
-            <!--  
-            <ion-item *ngFor=let info of infos>
-              <ion-label>
-                {{info.text}}
+        <ion-list lines="none">
+            <ion-item no-lines>
+              <ion-label text-uppercase text-wrap>
+                {{this.info}}
               </ion-label>
             </ion-item>
-            -->
-          </ion-list>
+        </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
@@ -42,14 +40,12 @@
       <ion-card-title>Ordem do dia</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-        <ion-list>
-          <!--  
-            <ion-item *ngFor=let ordem of ordems>
-              <ion-label>
-                {{ordem.infos}}
+        <ion-list lines="none">
+            <ion-item no-lines>
+              <ion-label text-uppercase text-wrap>
+                {{this.ordem}}
               </ion-label>
             </ion-item>
-            -->
         </ion-list>
     </ion-card-content>
   </ion-card>

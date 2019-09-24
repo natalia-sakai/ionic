@@ -148,7 +148,7 @@ class AuthController extends Controller
     public function getinfo()
     {
         //recebe do bd o valor 
-        $infoInfo=Info::where('ativo', '1')->value('info');
+        $infoInfo=Info::where('ativo', '1')->pluck('info');
         
         return response()->json($infoInfo);
     }
@@ -156,8 +156,7 @@ class AuthController extends Controller
     public function getordem()
     {
         //recebe do bd o valor 
-        $ordemInfo=Ordem::where('ativo', '1')->value('ordem');
-        
+        $ordemInfo=Ordem::where('ativo', '1')->pluck('ordem');
         return response()->json($ordemInfo);
     }
 

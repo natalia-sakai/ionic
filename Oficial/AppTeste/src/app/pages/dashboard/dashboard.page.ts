@@ -9,6 +9,7 @@ import { User } from 'src/app/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { empty } from 'rxjs';
 import { count } from 'rxjs/operators';
+import { getLocaleDayNames } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -21,15 +22,16 @@ export class DashboardPage implements OnInit {
   opcao: Number;
   public disabled=true;//desabilitado
   public havedata = false;
-  texts: any[] = [];
   reuniao:Reuniao = {id: null, data: '', ativo: 0};
 
   ordem: any[] = [];
-
+  info: any[] = [];
   constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService,private http: HttpClient,private env: EnvService, private route: ActivatedRoute) { 
   }
   ngOnInit() {
     this.showdata();
+    this.showordem();
+    this.showinfo();
   }
   //verifica se o usuario ja respondeu
   verifica(){ 
@@ -105,7 +107,26 @@ export class DashboardPage implements OnInit {
     this.authService.getordem()
     .subscribe(
       data =>{
-      this.ordem = data;
+        this.ordem = data;
+        for(let i=0; i<data.length; i++){
+          console.log(JSON.stringify(this.ordem[i]));
+        }
+      }, 
+      error=>{
+        console.log(error);
+      }
+    );
+  }
+  
+  showinfo()
+  {
+    this.authService.getinfo()
+    .subscribe(
+      data =>{
+        this.info = data;
+        for(let i=0; i<data.length; i++){
+          console.log(JSON.stringify(this.info[i]));
+        }
       }, 
       error=>{
         console.log(error);
