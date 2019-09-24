@@ -1,9 +1,14 @@
+import { Reuniao } from './../../models/reuniao';
+import { EnvService } from './../../services/env.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AlertService } from './../../services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ToastController, AlertController, ActionSheetController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
-import { Button } from 'protractor';
+import { ActivatedRoute, Router } from '@angular/router';
+import { empty } from 'rxjs';
+import { count } from 'rxjs/operators';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -13,52 +18,98 @@ export class DashboardPage implements OnInit {
 
   id:any;
   data_r:any;
-  public disabled = true;
+  opcao: Number;
+  public disabled=true;//desabilitado
   public havedata = false;
   texts: any[] = [];
+  reuniao:Reuniao = {id: null, data: '', ativo: 0};
 
-  constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService) { 
-    this.showdata();
+  ordem: any[] = [];
+
+  constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService,private http: HttpClient,private env: EnvService, private route: ActivatedRoute) { 
   }
   ngOnInit() {
-    
+    this.showdata();
   }
-
-  
-
-  resposta(resp: Number)
-  {
-    this.authService.getId().then(() => {
-        this.id = this.authService.id;
-    });
-
-    this.authService.confirma_presenca(this.id, resp).subscribe(
-      data => {
-        
+  //verifica se o usuario ja respondeu
+  verifica(){ 
+    this.authService.get_presenca().subscribe(
+      resp => {
+        //verifica se esta vazio, se tiver permite q o usuario escolha a opcao
+        if(JSON.stringify(resp)=="{}")
+        {
+          this.disabled = false;
+        }
+        else
+        {
+          this.disabled = true;
+        }
+          
       },
       error => {
         console.log(error);
-      },
-      () => {
-        this.alertService.presentToast('Confirmação enviada!');
-        this.disabled = true; //desabilita o botão
       }
     );
   }
-
-  showdata()
-  {/*
-    this.authService.getReuniao().subscribe((data)=>{
+  //mostra a data se tiver
+  async showdata()
+  {
+    this.authService.getReuniao()
+    .subscribe(
+    data=>{ 
       this.data_r = data;
-    });
-    console.log(this.data_r);
-
-    //se tiver reunião habilita
-    if(this.data_r != null)
-    {
-      this.havedata=true;
-      this.disabled=false;
+      //se tiver reunião habilita
+      if(this.data_r != null)
+      {
+        this.havedata=true;
+        this.verifica();
+      }
     }
-    */
+    , error=>{ 
+      console.log("error: " + error);
+    });
+  }
+
+  resposta(resp: Number)
+  {
+    this.authService.getId()
+      .subscribe(
+      data=>{ 
+        this.id = data.id;
+        //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
+        this.authService.confirma_presenca(this.id, resp ).subscribe(
+          data => {
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            this.alertService.presentToast('Confirmação enviada!');
+          }
+        );
+      }
+      , error=>{ 
+        console.log('nao entrou');
+        console.log("error: " + error);
+      });
+      this.verifica();
+  }
+
+  editar()
+  {
+    this.disabled = false;
+  }
+
+  showordem()
+  {
+    this.authService.getordem()
+    .subscribe(
+      data =>{
+      this.ordem = data;
+      }, 
+      error=>{
+        console.log(error);
+      }
+    );
   }
 }
