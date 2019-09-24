@@ -10,12 +10,15 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Lista de presença</ion-card-title>
-      <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r.data}} ?</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r|date: "dd/MM"}} ?</ion-card-subtitle>
       <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-        <ion-button color="primary" [disabled]="disabled" (click)=resposta(1)>SIM</ion-button>
-        <ion-button color="danger" [disabled]="disabled" (click)=resposta(0)>NÃO</ion-button>
+          <ion-button color="primary" [disabled]="disabled" (click)=resposta(1)>SIM</ion-button>
+          <ion-button color="danger" [disabled]="disabled" (click)=resposta(0)>NÃO</ion-button>
+      <ion-buttons slot="end">
+          <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+      </ion-buttons>
     </ion-card-content>
   </ion-card>
   <ion-card>

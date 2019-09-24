@@ -12,6 +12,8 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class LoginPage implements OnInit {
   
+  public datalogin = NgForm; //armazena os dados do form para caso precise
+
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthService,
@@ -39,6 +41,7 @@ export class LoginPage implements OnInit {
   login(form: NgForm) {
     this.authService.login(form.value.email, form.value.password).subscribe(
       data => {
+        this.authService.token = data['access_token'];
         this.alertService.presentToast("Logado!");
       },
       error => {

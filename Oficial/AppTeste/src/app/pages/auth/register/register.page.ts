@@ -13,6 +13,8 @@ import { IfStmt } from '@angular/compiler';
 export class RegisterPage implements OnInit {
 
   aux: number;
+  public dataregister = NgForm; //armazena os dados para caso precise
+  
   constructor(private modalCtrl: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,
