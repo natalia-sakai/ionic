@@ -5,6 +5,7 @@ use App\ListaPresenca;
 use App\Reuniao;
 use App\Ordem;
 use App\Info;
+use Hash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,6 +48,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string'
         ]);
+        
         //novo user
         $user = new User;
         //insere os dados
@@ -79,6 +81,34 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 
+    public function updateuser(Request $request)
+    {
+        $request->validate([
+            'id_user'=> 'required|int',
+            'fName' => 'required|string',
+            'lName' => 'required|string',
+            'email' => 'required|string|email'
+        ]);
+        User::where('id', $request->id_user)->update(['first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email]);
+
+        return response()->json([
+            'message' => 'Usuário Atualizado!'
+        ], 201);
+
+    }
+
+    public function updatepassword(Request $request)
+    {
+        $request->validate([
+            'id_user'=> 'required|int',
+            'password' => 'required|string'
+        ]);
+        $password = bcrypt($request->password);
+        User::where('id', $request->id_user)->update(['password'=> $password]);
+        return response()->json([
+            'message' => 'Senha Atualizada!'
+        ], 201);
+    }
     public function listapresenca(Request $request)
     {
         $request->validate([
@@ -135,6 +165,19 @@ class AuthController extends Controller
     {
         $userInfo=Auth::user();
         return response()->json($userInfo->id);
+    }
+
+    public function checkpassword(Request $request)
+    {
+        $request->validate([
+            'id_user'=> 'required|int',
+            'password' => 'required|string'
+        ]);
+        $password = User::where('id', $request->id_user)->value('password');
+        if(Hash::check($request->password, $password, []))
+            return response()->json('Senha correta!');
+        else
+            return response()->json('Senha incorreta!');
     }
     
     public function getreuniao()

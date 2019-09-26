@@ -17,7 +17,7 @@ export class AuthService {
   */
 
   //variaveis
-  
+  a="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImYzMzRmYzE3M2Y0MmRiY2VkMTZiM2JiMTkzZTRiNmU5NzM0OTk0NTRhMzUxN2I2YjUyY2MzNmVhNWQwOGM4OWM3YTBjMTIwN2NjMGVlNDQ0In0.eyJhdWQiOiIyIiwianRpIjoiZjMzNGZjMTczZjQyZGJjZWQxNmIzYmIxOTNlNGI2ZTk3MzQ5OTQ1NGEzNTE3YjZiNTJjYzM2ZWE1ZDA4Yzg5YzdhMGMxMjA3Y2MwZWU0NDQiLCJpYXQiOjE1Njk0MjE1MzEsIm5iZiI6MTU2OTQyMTUzMSwiZXhwIjoxNjAxMDQzOTMxLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.p_qrIku98uVTyr9rd53Q762_cuIuVd268j1VPr5zvmaBmnXys1ZPnEMoqliblCb3RwucmSTr6KWcdrVH8v8ePM4Fb-IHF2ffQc4AAlvVuTYBoNkbNZr9c8m9TFwNaD3Dnnx_BJmoQHhw_WRo15wlG9gGeM2awRMjaDBacnIDgp04W4_6lQunjpAoTf__Xf2YeTwoARweYdXti3DoFaieijPlNT_fXGQnxmPa1w7_Cq9zvWse7wa1ZIMkXcCTm4W9LdJsezbPLWCvpKOI_-PzsUcItl5FFYq01Xz8KtEONNAR4JZz6YRF3T-LEYo2TF_9LlpwbyA5FguKFQLE35zIJtZMv2WEzR3JGGlwy9e-HIgRLW42msnAzwAZE4cGYdSx-YRVyXIpxybjVm4RY6QA9J27rteM7VnjvDEfjT4lCGhQyutUMBTRtKwtdXelWSJpDY7HZCoJUpEVLMR_GEijMjGJhBGFNHVnB1CxIt2HV2TAP1_RMQwNWJaRZ2E-RBRGir3RDsN4FSkRJbdS0-atsTJ3kzMtw2p1BiAG5CAW3kAbQcUn3z5CDLLKRz-XlAQmzPQw4WoIXf7IFYmHnzzbHPov7A7Ul_pSkWVgsLKpVTU4pghiN_3uH7fYEm0EzKy_wf1lPyF_DALnrMqI0cF4lXEpXwItjdqP0WQ--imxAcc";
   isLoggedIn = false;
   token:any;
   id:any;
@@ -95,7 +95,7 @@ export class AuthService {
   logout() {
     //token de acesso teste
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
     .pipe(
@@ -111,21 +111,41 @@ export class AuthService {
   user() {
     //token de acesso teste
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
     .pipe(
-      tap(user => {
-        return user;
-      })
-    )
+      retry(1),
+      catchError(this.handleError)
+    ); 
   }
   
+  updateuser(id: Number,fName: String, lName: String, email: String) {
+    return this.http.put(this.env.API_URL + 'auth/updateuser',
+      {id_user: id, fName: fName, lName: lName, email: email}
+    )
+  }
+
+  updatepassword(id: Number, password: String) {
+    return this.http.put(this.env.API_URL + 'auth/updatepassword',
+    {id_user: id, password: password}
+    )
+  }
+  checkpassword(id: Number, password: String)
+  {
+    return this.http.post(this.env.API_URL + 'auth/checkpassword',
+      {id_user: id, password: password}
+    ).pipe(
+      retry(1),
+      catchError(this.handleError)
+    ); 
+  }
+
   getId(): Observable<any>
   {
     //token de acesso teste
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get<any>(this.env.API_URL + 'auth/user', { headers: headers })
     .pipe(
@@ -155,7 +175,7 @@ export class AuthService {
 
  getReuniao(): Observable<any> {
   let headers = new HttpHeaders({
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+    'Authorization': this.a
   });
   return this.http.get<any>( this.env.API_URL+'auth/getreuniao',{ headers: headers })
   .pipe(
@@ -171,11 +191,10 @@ export class AuthService {
     );
   }
 
-  
   get_presenca(): Observable<any>
   {
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get<any>( this.env.API_URL+'auth/getlista',{ headers: headers })
     .pipe(
@@ -188,7 +207,7 @@ export class AuthService {
   {
     //token de acesso teste
     let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get<any>( this.env.API_URL+'auth/getinfo',{ headers: headers })
     .pipe(
@@ -201,7 +220,7 @@ export class AuthService {
   {
      //token de acesso teste
      let headers = new HttpHeaders({
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRkZjVjY2MzOTgyYWU2NTA5MmQ2YWY5OTMyZGM4MWQ0ZWJjZWRmNDBmOTVkZjAxZDEyNGZiZmU2NjFkOWZhMjY1M2Y1Yzk2YmMwMzgzY2YzIn0.eyJhdWQiOiIyIiwianRpIjoiZGRmNWNjYzM5ODJhZTY1MDkyZDZhZjk5MzJkYzgxZDRlYmNlZGY0MGY5NWRmMDFkMTI0ZmJmZTY2MWQ5ZmEyNjUzZjVjOTZiYzAzODNjZjMiLCJpYXQiOjE1NjkyNDcwMzMsIm5iZiI6MTU2OTI0NzAzMywiZXhwIjoxNjAwODY5NDMzLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.3HhwFiPkU_9tvwBW2mPeIqmiypJIyrNWpGgaA5XP3NqGy4hUJa2aqtan7RhtYfMMI_JZPjzPFKlhVXJgBpTbbWrV--Fa9ttRkydZClPl3yamMqkp9BZBMRJtj5q3h8bLHzvrPO0R96u-yWtVLr7F8m6OfQeACHNjXbDzK74EwKlcjjnQiR8GgGiH17VG0vyHnudm5G1DiSKf6SsHxb917qeM4jLgx1_8-vzh-ZZa0bI3hEZa2waLDOpcZX6CMaGwyWpb5baar2aTVmMMN_JDdPCGFpuF9eDL4p6HNsb-OI1ZpZKONOHA0pN6YQSljXTmk0FiUdTEkFW7klhgAz2U6xRUxR_sO84w8weIloh4f84uGAEVy1rGsiQEQHHNfsorq2-CzZ1eluW9w-BYyuyoqeEhk-vgF8iBSBN_SM6lGDz94aBjOh_XDlZjMuIDobD11Ba9N48mSoJ_JUmfcpCTw0maxFI20Lz_i-_pjmQXEsT_yzXc6ZRgtCUL3Yn9i7K16za_aEgbSC6Cget7aa6bZYGgHy4UpGwwxJIUIAdxGbDMpsv5epiTVBPsliGm6qkTFmZlV_aFxJaJmzwsGcAJnnNCWvGGJ0vcWwOJbCqasUziC7Gk7NR7Xyl1kTj7XcvBOp1jBT9rFLYeuj4Ujr8xKOjw-3fbqu1fSeVaDU0JsfY'
+      'Authorization': this.a
     });
     return this.http.get<any>( this.env.API_URL+'auth/getordem',{ headers: headers })
     .pipe(

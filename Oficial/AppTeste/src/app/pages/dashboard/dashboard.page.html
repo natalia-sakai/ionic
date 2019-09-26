@@ -14,8 +14,8 @@
       <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-          <ion-button color="primary" [disabled]="disabled" (click)=resposta(1)>SIM</ion-button>
-          <ion-button color="danger" [disabled]="disabled" (click)=resposta(0)>NÃO</ion-button>
+          <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
+          <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
       <ion-buttons slot="end">
           <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
       </ion-buttons>

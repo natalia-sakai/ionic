@@ -12,6 +12,9 @@ Route::prefix('auth')->group(function () {
     Route::post('register', 'Auth\AuthController@register');
     Route::post('listapresenca', 'Auth\AuthController@listapresenca');
     Route::post('reuniao', 'Auth\AuthController@reuniao');
+    Route::put('updateuser', 'Auth\AuthController@updateuser');
+    Route::put('updatepassword', 'Auth\AuthController@updatepassword');
+    Route::post('checkpassword', 'Auth\AuthController@checkpassword');
 
     Route::middleware(['auth:api'])->group(function () {
         Route::get('logout', 'Auth\AuthController@logout');
@@ -21,7 +24,6 @@ Route::prefix('auth')->group(function () {
         Route::get('getordem', 'Auth\AuthController@getordem');
         Route::get('getinfo', 'Auth\AuthController@getinfo');
         Route::get('getlista', 'Auth\AuthController@getlista');
-        
     });
 });
 

@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { empty } from 'rxjs';
 import { count } from 'rxjs/operators';
 import { getLocaleDayNames } from '@angular/common';
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -17,15 +18,18 @@ import { getLocaleDayNames } from '@angular/common';
 })
 export class DashboardPage implements OnInit {
 
-  id:any;
-  data_r:any;
-  opcao: Number;
-  public disabled=true;//desabilitado
+  public id:any;
+  public data_r:any;
+  public opcao: Number;
+  public p1="primary";
+  public p2="danger";
+  public disabled1=true;//desabilitado
+  public disabled2=true;//desabilitado
   public havedata = false;
-  reuniao:Reuniao = {id: null, data: '', ativo: 0};
+  public reuniao:Reuniao = {id: null, data: '', ativo: 0};
 
-  ordem: any[] = [];
-  info: any[] = [];
+  public ordem: any[] = [];
+  public info: any[] = [];
   constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService,private http: HttpClient,private env: EnvService, private route: ActivatedRoute) { 
   }
   ngOnInit() {
@@ -33,18 +37,33 @@ export class DashboardPage implements OnInit {
     this.showordem();
     this.showinfo();
   }
+
+  //mostrar qual o usuario tinha marcado!! -> disable only one button
+
   //verifica se o usuario ja respondeu
-  verifica(){ 
+  async verifica(){ 
     this.authService.get_presenca().subscribe(
       resp => {
         //verifica se esta vazio, se tiver permite q o usuario escolha a opcao
         if(JSON.stringify(resp)=="{}")
         {
-          this.disabled = false;
+          this.disabled1 = false;
+          this.disabled2 = false;
         }
         else
         {
-          this.disabled = true;
+          if(JSON.stringify(resp.presenca) == '1')
+          {
+            this.p1 = "success";
+            this.p2 = "danger";
+            this.disabled1 = true;
+          }
+          else if(JSON.stringify(resp.presenca) == '0')
+          {
+            this.p2 = "success";
+            this.p1 = "primary";
+            this.disabled2 = true;
+          }
         }
           
       },
@@ -74,6 +93,7 @@ export class DashboardPage implements OnInit {
 
   resposta(resp: Number)
   {
+    
     this.authService.getId()
       .subscribe(
       data=>{ 
@@ -87,11 +107,11 @@ export class DashboardPage implements OnInit {
           },
           () => {
             this.alertService.presentToast('Confirmação enviada!');
+            this.verifica();
           }
         );
       }
       , error=>{ 
-        console.log('nao entrou');
         console.log("error: " + error);
       });
       this.verifica();
@@ -99,7 +119,8 @@ export class DashboardPage implements OnInit {
 
   editar()
   {
-    this.disabled = false;
+    this.disabled1 = false;
+    this.disabled2 = false;
   }
 
   showordem()
@@ -109,7 +130,7 @@ export class DashboardPage implements OnInit {
       data =>{
         this.ordem = data;
         for(let i=0; i<data.length; i++){
-          console.log(JSON.stringify(this.ordem[i]));
+          this.ordem[i];
         }
       }, 
       error=>{
@@ -125,7 +146,7 @@ export class DashboardPage implements OnInit {
       data =>{
         this.info = data;
         for(let i=0; i<data.length; i++){
-          console.log(JSON.stringify(this.info[i]));
+          this.info[i];
         }
       }, 
       error=>{
