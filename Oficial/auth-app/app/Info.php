@@ -7,14 +7,14 @@ use Illuminate\Foundation\Auth\Info as Authenticatable;
 class Info extends Authenticatable
 {
     use HasApiTokens, Notifiable;
-    protected $table = 'info';
+    protected $table = 'informativo';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'info','ativo'
+        'info','ativo','id_user','permissao'
     ];
     /**
      * The attributes that should be hidden for arrays.

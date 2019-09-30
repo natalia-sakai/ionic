@@ -18,14 +18,34 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Work to do',
-      url: '/work',
+      title: 'Lista de presença',
+      url: '/presenca',
       icon: 'list-box'
+    },
+    {
+      title: 'Informativos',
+      url: '/informativos',
+      icon: 'paper'
+    },
+    {
+      title: 'Ágape',
+      url: '/agape',
+      icon: 'list'
+    },
+    {
+      title: 'Ordem do dia',
+      url: '/work',
+      icon: 'today'
     },
     {
       title: 'Financeiro',
       url: '/financeiro',
       icon: 'cash'
+    },
+    {
+      title: 'Work to do',
+      url: '/work',
+      icon: 'bookmark'
     },
     {
       title: 'My account',

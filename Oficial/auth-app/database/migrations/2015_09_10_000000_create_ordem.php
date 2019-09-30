@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateListaPresenca extends Migration
+class CreateOrdem extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateListaPresenca extends Migration
      */
     public function up()
     {
-        Schema::create('lista_presencas', function (Blueprint $table) {
+        Schema::create('ordem', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ordem'); 
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('presenca');
-            $table->string('motivo');
+            $table->boolean('ativo');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
@@ -31,6 +31,6 @@ class CreateListaPresenca extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lista_presencas');
+        Schema::dropIfExists('ordem');
     }
 }

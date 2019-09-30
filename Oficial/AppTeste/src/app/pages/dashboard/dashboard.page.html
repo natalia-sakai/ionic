@@ -9,23 +9,32 @@
 <ion-content padding>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Lista de presença</ion-card-title>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/presenca']" text-left>
+          LISTA DE PRESENÇA
+          </ion-button>
+      </ion-card-title>
       <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r|date: "dd/MM"}} ?</ion-card-subtitle>
-      <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada...</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="padding-left: 35px">
           <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
           <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
-      <ion-buttons slot="end">
+      <ion-buttons>
           <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+          <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo()>MOTIVO</ion-button>
       </ion-buttons>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Informativos</ion-card-title>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/informativos']">
+            INFORMATIVOS
+          </ion-button>
+      </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="padding-left: 35px">
         <ion-list lines="none">
             <ion-item no-lines>
               <ion-label text-uppercase text-wrap>
@@ -37,9 +46,25 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Ordem do dia</ion-card-title>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/agape']">
+            ÁGAPE
+          </ion-button>
+      </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="padding-left: 35px">
+        
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/ordem']">
+            ORDEM DO DIA
+          </ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding-left: 35px">
         <ion-list lines="none">
             <ion-item no-lines>
               <ion-label text-uppercase text-wrap>
@@ -51,9 +76,13 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Financeiro</ion-card-title>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/financeiro']">
+            FINANCEIRO
+          </ion-button>
+      </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="padding-left: 35px">
       <h3>
           Verifique a situação financeira
       </h3>

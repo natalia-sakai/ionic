@@ -17,7 +17,7 @@ export class AuthService {
   */
 
   //variaveis
-  a="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImYzMzRmYzE3M2Y0MmRiY2VkMTZiM2JiMTkzZTRiNmU5NzM0OTk0NTRhMzUxN2I2YjUyY2MzNmVhNWQwOGM4OWM3YTBjMTIwN2NjMGVlNDQ0In0.eyJhdWQiOiIyIiwianRpIjoiZjMzNGZjMTczZjQyZGJjZWQxNmIzYmIxOTNlNGI2ZTk3MzQ5OTQ1NGEzNTE3YjZiNTJjYzM2ZWE1ZDA4Yzg5YzdhMGMxMjA3Y2MwZWU0NDQiLCJpYXQiOjE1Njk0MjE1MzEsIm5iZiI6MTU2OTQyMTUzMSwiZXhwIjoxNjAxMDQzOTMxLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.p_qrIku98uVTyr9rd53Q762_cuIuVd268j1VPr5zvmaBmnXys1ZPnEMoqliblCb3RwucmSTr6KWcdrVH8v8ePM4Fb-IHF2ffQc4AAlvVuTYBoNkbNZr9c8m9TFwNaD3Dnnx_BJmoQHhw_WRo15wlG9gGeM2awRMjaDBacnIDgp04W4_6lQunjpAoTf__Xf2YeTwoARweYdXti3DoFaieijPlNT_fXGQnxmPa1w7_Cq9zvWse7wa1ZIMkXcCTm4W9LdJsezbPLWCvpKOI_-PzsUcItl5FFYq01Xz8KtEONNAR4JZz6YRF3T-LEYo2TF_9LlpwbyA5FguKFQLE35zIJtZMv2WEzR3JGGlwy9e-HIgRLW42msnAzwAZE4cGYdSx-YRVyXIpxybjVm4RY6QA9J27rteM7VnjvDEfjT4lCGhQyutUMBTRtKwtdXelWSJpDY7HZCoJUpEVLMR_GEijMjGJhBGFNHVnB1CxIt2HV2TAP1_RMQwNWJaRZ2E-RBRGir3RDsN4FSkRJbdS0-atsTJ3kzMtw2p1BiAG5CAW3kAbQcUn3z5CDLLKRz-XlAQmzPQw4WoIXf7IFYmHnzzbHPov7A7Ul_pSkWVgsLKpVTU4pghiN_3uH7fYEm0EzKy_wf1lPyF_DALnrMqI0cF4lXEpXwItjdqP0WQ--imxAcc";
+  a="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVjNDkzYjhmM2I0ZjE4ODVhY2VlOTNjY2QwODMxODkyYWIwNWU0ODZhZDM1NTk2M2QzZmM1ZWJmY2UwMzJiMmRhMTgxNTU2ZWVlM2FjOTEyIn0.eyJhdWQiOiIyIiwianRpIjoiNWM0OTNiOGYzYjRmMTg4NWFjZWU5M2NjZDA4MzE4OTJhYjA1ZTQ4NmFkMzU1OTYzZDNmYzVlYmZjZTAzMmIyZGExODE1NTZlZWUzYWM5MTIiLCJpYXQiOjE1Njk1MTU0NjgsIm5iZiI6MTU2OTUxNTQ2OCwiZXhwIjoxNjAxMTM3ODY4LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.otkEbkF7QavXOxu2h8V0TcQ605TbdtyWhEyvDF5GfyH8jXOti_tp74Hf4TW_-wfVDuGO7fE_Bszpe1MPE0TEQ0QTm3CAUZtifoX4gLy4ELtcRJZrocBG9EN3oGv0iYTsQi_6-hL6jP88acc-42kJ0I0AuKndx-4P7afvZu5cYJv0Em05crX4Wy-y_uDDKnT0QXuwJ9SDtTeEADJu353E88hH-n6hL_xQp2ENDcuA-OTuMrfNVALPJbrUhTcBSIM8iAUKXAlxKUVarbULi3QKpicahnIKbjm53TxdO30i5t03ESlK8-jll-sP_GeQgFBIJRkQ7T7ez35on3lnDgLw4z8aVR9BICMYxHZcIGsXwtpWkNdkHFRblkQFRhq5Ek9kUfUvEWhiE0T44EVCNFWSCgAcsmHBB2GZ0FMlBGaZJgPQ3gSTDLAvyZHsPx-rHDccMDZbiFkk2v141Gjue_6QtaOMOD_YNOX0QzLsdRDduHNxPBD7CRnWzcTuNxxvWVVD-3iezZPM8XOqznbAsEwUOd4muXG0bYVr8zbh7bNs0zNSnFrOcXzMksWIIs3s4olKoC3IQv9NqKeB5NFp52832YxI9DmEpDrW46CUoGrh8-cwr9AOmiGPviQKiIn6sv0_noVt77hrBPBZdGIuXyY0aEZ9Lx9JuVcOSAD1JObH_bw";
   isLoggedIn = false;
   token:any;
   id:any;
@@ -86,9 +86,9 @@ export class AuthService {
     );
   }
 
-  register(fName: String, lName: String, email: String, password: String) {
+  register(fName: String, lName: String, email: String, password: String, type: Number) {
     return this.http.post(this.env.API_URL + 'auth/register',
-      {fName: fName, lName: lName, email: email, password: password}
+      {fName: fName, lName: lName, email: email, password: password, type: type}
     )
   }
 
@@ -184,10 +184,10 @@ export class AuthService {
   ); 
  }
 
-  confirma_presenca(id_user: Number, resp: Number)
+  confirma_presenca(id_user: Number, resp: Number, motivo: String)
   {
     return this.http.post(this.env.API_URL + 'auth/listapresenca',
-      {id_user: id_user, presenca: resp}
+      {id_user: id_user, presenca: resp, motivo: motivo}
     );
   }
 
@@ -196,36 +196,24 @@ export class AuthService {
     let headers = new HttpHeaders({
       'Authorization': this.a
     });
-    return this.http.get<any>( this.env.API_URL+'auth/getlista',{ headers: headers })
-    .pipe(
-    retry(1),
-    catchError(this.handleError)
-    ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getlista',{ headers: headers }); 
   }
 
   getinfo(): Observable<any>
   {
-    //token de acesso teste
-    let headers = new HttpHeaders({
-      'Authorization': this.a
-    });
-    return this.http.get<any>( this.env.API_URL+'auth/getinfo',{ headers: headers })
-    .pipe(
-    retry(1),
-    catchError(this.handleError)
-    ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getinfo');
   }
 
   getordem(): Observable<any>
   {
-     //token de acesso teste
-     let headers = new HttpHeaders({
-      'Authorization': this.a
-    });
-    return this.http.get<any>( this.env.API_URL+'auth/getordem',{ headers: headers })
-    .pipe(
-    retry(1),
-    catchError(this.handleError)
-    );  
+    return this.http.get<any>( this.env.API_URL+'auth/getordem');  
+  }
+
+  getCargos()
+  {
+    return this.http.get<any>( this.env.API_URL+'auth/getcargos').pipe(
+      retry(1),
+      catchError(this.handleError)
+      ); 
   }
 }

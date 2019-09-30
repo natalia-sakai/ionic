@@ -25,9 +25,10 @@ export class DashboardPage implements OnInit {
   public p2="danger";
   public disabled1=true;//desabilitado
   public disabled2=true;//desabilitado
+  public disabled3=true;//desabilitado
   public havedata = false;
   public reuniao:Reuniao = {id: null, data: '', ativo: 0};
-
+  public motivo: any;
   public ordem: any[] = [];
   public info: any[] = [];
   constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService,private http: HttpClient,private env: EnvService, private route: ActivatedRoute) { 
@@ -65,6 +66,15 @@ export class DashboardPage implements OnInit {
             this.disabled2 = true;
           }
         }
+        //se ja tiver algum motivo
+        if(JSON.stringify(resp.motivo)!=null)
+        {
+          this.disabled3 = true;
+        }
+        else
+        {
+          this.disabled3 = false;
+        }
           
       },
       error => {
@@ -93,13 +103,23 @@ export class DashboardPage implements OnInit {
 
   resposta(resp: Number)
   {
+    this.opcao = resp;
+  }
+
+  bmotivo()
+  {
+    //abre um pop
     
+  }
+
+  lista()
+  {
     this.authService.getId()
       .subscribe(
       data=>{ 
         this.id = data.id;
         //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
-        this.authService.confirma_presenca(this.id, resp ).subscribe(
+        this.authService.confirma_presenca(this.id, this.opcao ,this.motivo).subscribe(
           data => {
           },
           error => {
@@ -116,7 +136,6 @@ export class DashboardPage implements OnInit {
       });
       this.verifica();
   }
-
   editar()
   {
     this.disabled1 = false;

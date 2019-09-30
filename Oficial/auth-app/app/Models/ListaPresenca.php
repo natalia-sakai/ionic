@@ -13,7 +13,7 @@ class ListaPresenca extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id_user','presenca'
+        'id_user','presenca','motivo'
     ];
     /**
      * The attributes that should be hidden for arrays.

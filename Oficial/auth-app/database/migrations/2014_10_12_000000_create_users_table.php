@@ -17,9 +17,18 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('endereco');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->date('data_nasc');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('cargo_id')->unsigned();
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
+            $table->bigInteger('avental_id')->unsigned();
+            $table->foreign('avental_id')->references('id')->on('avental')->onDelete('cascade');
+            $table->string('telefone');
             $table->rememberToken();
             $table->timestamps();
         });
