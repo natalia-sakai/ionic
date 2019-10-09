@@ -12,9 +12,16 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/auth/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
   { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', canActivate: [AuthGuard] },
-  { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' },
+  { path: 'account', loadChildren: './pages/conta/account/account.module#AccountPageModule' },
   { path: 'work', loadChildren: './pages/work/work.module#WorkPageModule' },
-  { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule' }
+  { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule' },
+  { path: 'logout', loadChildren: './pages/auth/logout/logout.module#LogoutPageModule' },
+  { path: 'editardados', loadChildren: './pages/conta/editardados/editardados.module#EditardadosPageModule' },
+  { path: 'editarsenha', loadChildren: './pages/conta/editarsenha/editarsenha.module#EditarsenhaPageModule' },
+  { path: 'presenca', loadChildren: './pages/presenca/presenca.module#PresencaPageModule' },
+  { path: 'informativos', loadChildren: './pages/informativos/informativos.module#InformativosPageModule' },
+  { path: 'agape', loadChildren: './pages/agape/agape.module#AgapePageModule' },
+  { path: 'ordem', loadChildren: './pages/ordem/ordem.module#OrdemPageModule' }
 ];
 
 @NgModule({

@@ -46,5 +46,4 @@ export class LandingPage implements OnInit {
     });
     return await loginModal.present();
   }
-
 }

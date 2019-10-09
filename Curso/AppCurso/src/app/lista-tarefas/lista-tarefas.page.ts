@@ -12,7 +12,7 @@ export class ListaTarefasPage implements OnInit {
   constructor(private alertCtrl : AlertController, private toastCtrl : ToastController, private actionSheetCtrl : ActionSheetController) { 
     let tasksJson = localStorage.getItem('taskbd');
     if(tasksJson != null){
-      this.tasks = JSON.parse(tasksJson)
+      this.tasks = JSON.parse(tasksJson);
     }
   }
 

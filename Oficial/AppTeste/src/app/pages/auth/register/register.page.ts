@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { IfStmt } from '@angular/compiler';
-import { async } from 'q';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -14,15 +13,29 @@ import { async } from 'q';
 export class RegisterPage implements OnInit {
 
   aux: number;
-  selected: any;
-  changed: any;
-  valued: number;
+  public dataregister = NgForm; //armazena os dados para caso precise
+  public formulario: any;
+  public cargos:any[] = [];
+  public is=25;
+
   constructor(private modalCtrl: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,
-    private alertService: AlertService,
-    private alertCtrl : AlertController
-  ) { }
+    private alertService: AlertService
+  ) 
+  { 
+    this.authService.getCargos().subscribe(
+      data=>{ 
+        this.cargos = data;
+        for(let i=0; i<=25; i++){
+          this.cargos[i];
+          console.log(this.cargos[i]);
+        }
+      }
+      , error=>{ 
+        console.log("error: " + error);
+      });
+  }
 
   ngOnInit() {
   }
@@ -41,18 +54,18 @@ export class RegisterPage implements OnInit {
   }
   
   register(form: NgForm) {
+    console.log(form.value);
     if(form.value.password != form.value.password_s)
     {
       this.alertService.presentToast("Senha incorreta!");
-      
     }
-    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
+    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, form.value.tipo).subscribe(
       data => {
         this.authService.login(form.value.email, form.value.password).subscribe(
           data => {
           },
           error => {
-            console.log(error);
+            this.alertService.presentToast("Preencha todos os campos corretamente");
           },
           () => {
             this.dismissRegister();
@@ -62,12 +75,11 @@ export class RegisterPage implements OnInit {
         this.alertService.presentToast(data['message']);
       },
       error => {
-        console.log(error);
+        this.alertService.presentToast("Preencha todos os campos corretamente!");
       },
       () => {
         
       }
     );
   }
-
 }

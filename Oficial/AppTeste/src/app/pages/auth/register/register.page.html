@@ -5,7 +5,7 @@
     </ion-button>
   <form #form="ngForm" (ngSubmit)="register(form)" method="POST">
     <ion-item style="border-radius: 15px">
-        <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[a-z\s]+$" required="true" ></ion-input>
+        <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[a-z\s]+$" required="true"></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 15px">
@@ -15,6 +15,10 @@
     <ion-item style="border-radius: 15px">
       <ion-input type="email" ngModel name="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true"></ion-input>
     </ion-item>
+    <br>
+    <ion-select placeHolder="Selecione o cargo" ngModel name="tipo" required="true">
+      <ion-select-option  value="2">{{this.cargos}}</ion-select-option>
+    </ion-select>
     <br>
     <ion-item style="border-radius: 15px">
       <ion-input type="password" ngModel name="password" placeholder="Password" required="true"></ion-input>

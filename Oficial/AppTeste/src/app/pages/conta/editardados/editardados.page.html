@@ -1,0 +1,26 @@
+<ion-content padding>
+  <ion-button fill='clear' (click)="dismiss()" style="color: white">
+    <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+    Back
+  </ion-button>
+  <ion-grid text-center>
+      <img  src="\assets\user.png" >
+  </ion-grid> 
+  <br>
+  <form #form="ngForm" (ngSubmit)="editar(form)" method="POST">
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel name="fName"type="text" pattern="[a-z\s]+$" required="true" value={{this.fname}} ></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel name="lName" type="text" pattern="[a-z\s]+$" required="true" value={{this.lname}}></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input type="email" ngModel name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true" value={{this.email}}></ion-input>
+    </ion-item>
+    <br>
+    <ion-button type="submit" round expand="block" color="primary">Salvar edição</ion-button>
+
+  </form>
+</ion-content>

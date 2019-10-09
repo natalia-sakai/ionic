@@ -18,9 +18,24 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Work to do',
-      url: '/work',
+      title: 'Lista de presença',
+      url: '/presenca',
       icon: 'list-box'
+    },
+    {
+      title: 'Informativos',
+      url: '/informativos',
+      icon: 'paper'
+    },
+    {
+      title: 'Ágape',
+      url: '/agape',
+      icon: 'list'
+    },
+    {
+      title: 'Ordem do dia',
+      url: '/work',
+      icon: 'today'
     },
     {
       title: 'Financeiro',
@@ -28,10 +43,21 @@ export class AppComponent {
       icon: 'cash'
     },
     {
+      title: 'Work to do',
+      url: '/work',
+      icon: 'bookmark'
+    },
+    {
       title: 'My account',
       url: '/account',
       icon: 'contact'
+    },
+    {
+      title: 'Logout',
+      url: '/logout',
+      icon: 'log-out'
     }
+
   ];
 
   constructor(
@@ -54,18 +80,5 @@ export class AppComponent {
 
     });
   }
-   // When Logout Button is pressed 
-   logout() {
-    this.authService.logout().subscribe(
-      data => {
-        this.alertService.presentToast(data['message']);        
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.navCtrl.navigateRoot('/landing');
-      }
-    );
-  }
+
 }
