@@ -22,7 +22,7 @@ Route::prefix('auth')->group(function () {
     
     Route::get('getcargos','Auth\AuthController@getcargos');
     Route::get('getinfo', 'Auth\AuthController@getinfo');
-    Route::get('getlista', 'Auth\AuthController@getlista');
+    
     Route::get('getreuniao', 'Auth\AuthController@getreuniao');
     Route::get('getordem', 'Auth\AuthController@getordem');
 
@@ -31,6 +31,7 @@ Route::prefix('auth')->group(function () {
         Route::get('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
         Route::get('getid', 'Auth\AuthController@getid');
+        Route::get('getlista', 'Auth\AuthController@getlista');
     });
 });
 

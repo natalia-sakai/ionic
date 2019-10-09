@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/presenca']">
+          LISTA DE PRESENÇA
+          </ion-button>
+      </ion-card-title>
+      <ion-list lines="none">
+        <ion-item>
+            <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada...</ion-card-subtitle>
+            <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r| date: "dd/MM" }} ?</ion-card-subtitle>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+    <ion-card-content style="padding-left: 35px">
+          <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
+          <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
+      <ion-buttons>
+          <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+          <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo()>MOTIVO</ion-button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/informativos']">
+            INFORMATIVOS
+          </ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let inform of info">
+          <ion-label text-uppercase>{{inform}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/agape']">
+            ÁGAPE
+          </ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding-left: 15px">
+        
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/ordem']">
+            ORDEM DO DIA
+          </ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let ordens of ordem">
+          <ion-label text-uppercase>{{ordens}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          <ion-button fill="clear" size="large" [routerLink]="['/financeiro']">
+            FINANCEIRO
+          </ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding-left: 30px">
+      <h3>
+          Verifique a situação financeira
+      </h3>
+      <br>
+      <ion-button color="primary" [routerLink]="['/financeiro']">Ver mais</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

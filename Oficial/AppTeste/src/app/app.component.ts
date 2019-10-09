@@ -34,7 +34,7 @@ export class AppComponent {
     },
     {
       title: 'Ordem do dia',
-      url: '/work',
+      url: '/ordem',
       icon: 'today'
     },
     {

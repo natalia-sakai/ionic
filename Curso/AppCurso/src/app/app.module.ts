@@ -14,6 +14,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { Flashlight } from '@ionic-native/flashlight/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,8 @@ import { Flashlight } from '@ionic-native/flashlight/ngx';
     BrowserModule,
     HttpClientModule, //responsável por fazer requisições
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,

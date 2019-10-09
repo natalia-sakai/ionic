@@ -14,6 +14,11 @@ export class EditardadosPage implements OnInit {
   fname: any;
   lname: any;
   email: any;
+  endereco: any;
+  cidade: any;
+  estado: any
+  telefone: any;
+  data_nasc: any;
   public id: any;
   constructor(private modalCtrl: ModalController, private authService: AuthService, private alertService: AlertService) { }
 
@@ -33,6 +38,11 @@ export class EditardadosPage implements OnInit {
       this.fname = data.first_name.replace("\"", "");
       this.lname = data.last_name.replace("\"", "");
       this.email = data.email.replace("\"", "");
+      this.endereco = data.endereco.replace("\"", "");
+      this.cidade = data.cidade.replace("\"", "");
+      this.estado = data.estado.replace("\"", "");
+      this.telefone = data.telefone.replace("\"", "");
+      this.data_nasc = data.data_nasc.replace("\"", "");
     }, error=>{ 
       console.log("error: " + error);
     });
@@ -44,7 +54,7 @@ export class EditardadosPage implements OnInit {
     .subscribe(
     data=>{ 
       this.id = data.id;
-      this.authService.updateuser(this.id,form.value.fName, form.value.lName, form.value.email).subscribe(
+      this.authService.updateuser(this.id,form.value.fName, form.value.lName, form.value.email, form.value.endereco, form.value.cidade, form.value.estado, form.value.data_nasc, form.value.telefone).subscribe(
         resp => {
         },
         error => {

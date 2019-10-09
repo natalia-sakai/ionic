@@ -132,7 +132,7 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
-        /*para o login é preciso criar o token, no caso do pc precisa fazer:
+        /*para o login é preciso criar o token, precisa fazer:
         php artisan passport:install que ele dará um token e add no banco sozinho
         */
         $request->validate([
@@ -165,9 +165,14 @@ class AuthController extends Controller
     
     public function logout(Request $request){
         $request->user()->token()->revoke();
-        return response()->json([
-            'message' => 'Logged out feito com sucesso!'
-        ]);
+        if($request == null)
+            return response()->json([
+                'message' => 'Logout falhou!'
+            ]);
+        else
+            return response()->json([
+            'message' => 'Logout feito com sucesso!'
+            ]);
     }
     //validacao
     public function checkpassword(Request $request){
@@ -203,9 +208,18 @@ class AuthController extends Controller
             'id_user'=> 'required|int',
             'fName' => 'required|string',
             'lName' => 'required|string',
-            'email' => 'required|string|email'
+            'email' => 'required|string|email',
+            'endereco' => 'required|string',
+            'cidade' => 'required|string',
+            'estado' => 'required|string',
+            'data_nasc' => 'required|date',
+            'telefone' => 'required|string'
         ]);
-        User::where('id', $request->id_user)->update(['first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email]);
+        User::where('id', $request->id_user)->update([
+            'first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email,
+            'endereco' => $request->endereco, 'cidade'=> $request->cidade, 'estado'=>$request->estado,
+            'data_nasc'=>$request->data_nasc, 'telefone'=>$request->telefone
+        ]);
 
         return response()->json([
             'message' => 'Usuário Atualizado!'
@@ -230,8 +244,12 @@ class AuthController extends Controller
         $id = $userInfo->id;
         //pega o primeiro q tiver o id (q é unico)
         $listaInfo = ListaPresenca::where('id_user', $id)->first();
-        //se tiver a info no bd
+        if($listaInfo != null)
             return response()->json($listaInfo);
+        else
+            return response()->json([
+                'message' => 'Lista de presenca não marcada!'
+            ], 201);
     }
 
     public function getreuniao(){
