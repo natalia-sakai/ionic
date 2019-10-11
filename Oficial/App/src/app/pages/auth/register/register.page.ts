@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
   public cargos:any[] = [];
   public ufs = 
   ['AC','AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
-  constructor(private modalCtrl: ModalController,
+  constructor(
     private authService: AuthService,
     private navCtrl: NavController,
     private alertService: AlertService
@@ -40,18 +40,11 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
-
-  // Dismiss Register Modal
-  dismissRegister() {
-    this.modalCtrl.dismiss();
+  landing() {
+    this.navCtrl.navigateRoot('/landing');
   }
-  // On Login button tap, dismiss Register modal and open login Modal
-  async loginModal() {
-    this.dismissRegister();
-    const loginModal = await this.modalCtrl.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
+  loginModal() {
+    this.navCtrl.navigateRoot('/login');
   }
   auxtel:any;
   auxdata:any;
@@ -79,7 +72,6 @@ export class RegisterPage implements OnInit {
               this.alertService.presentToast("Verifique se você preencheu os campos corretamente corretamente");
             },
             () => {
-              this.dismissRegister();
               this.navCtrl.navigateRoot('/dashboard');
             }
           );

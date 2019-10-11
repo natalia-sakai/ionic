@@ -1,7 +1,7 @@
 import { EditsenhaPage } from './../editsenha/editsenha.page';
 import { EditdadosPage } from './../editdados/editdados.page';
 import { AuthService } from '../../../services/auth.service';
-import { ToastController, MenuController, AlertController, ActionSheetController, ModalController } from '@ionic/angular';
+import { ToastController, MenuController, AlertController, ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 
@@ -20,7 +20,7 @@ export class AccountPage implements OnInit {
   estado: any
   telefone: any;
   data_nasc: any;
-  constructor(private authService : AuthService, private modalController: ModalController) {
+  constructor(private authService : AuthService, private navCtrl : NavController) {
    }
 
   ngOnInit() {
@@ -47,17 +47,11 @@ export class AccountPage implements OnInit {
   }
 
   async editardados(){
-    const editardadosModal = await this.modalController.create({
-      component: EditdadosPage,
-    });
-    return await editardadosModal.present();
+    this.navCtrl.navigateRoot('/editdados');
   }
 
   async editarsenha(){
-    const editarsenhaModal = await this.modalController.create({
-      component: EditsenhaPage,
-    });
-    return await editarsenhaModal.present();
+    this.navCtrl.navigateRoot('/editsenha');
   }
   
 

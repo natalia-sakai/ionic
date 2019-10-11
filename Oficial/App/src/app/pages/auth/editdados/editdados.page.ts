@@ -1,7 +1,7 @@
 import { AlertService } from './../../../services/alert.service';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './../../../services/auth.service';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -20,14 +20,14 @@ export class EditdadosPage implements OnInit {
   telefone: any;
   data_nasc: any;
   public id: any;
-  constructor(private modalCtrl: ModalController, private authService: AuthService, private alertService: AlertService) { }
+  constructor(private authService: AuthService, private alertService: AlertService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.showdados();
   }
 
   dismiss() {
-    this.modalCtrl.dismiss();
+    this.navCtrl.navigateRoot('/account');
   }
 
   showdados()
@@ -62,6 +62,7 @@ export class EditdadosPage implements OnInit {
         },
         () => {
           this.alertService.presentToast('Usuário atualizado!');
+          this.navCtrl.navigateRoot('/account');
         }
       );
     }

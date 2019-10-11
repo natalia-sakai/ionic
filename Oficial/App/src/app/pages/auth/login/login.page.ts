@@ -15,7 +15,6 @@ export class LoginPage implements OnInit {
   public datalogin = NgForm; //armazena os dados do form para caso precise
 
   constructor(
-    private modalCtrl: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,
     private alertService: AlertService
@@ -23,21 +22,14 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-  // Dismiss Login Modal
-  dismissLogin() {
-    this.modalCtrl.dismiss();
-  }
 
-  // On Register button tap, dismiss login modal and open register modal
+  landing() {
+    this.navCtrl.navigateRoot('/landing');
+  }
   async registerModal() {
-    this.dismissLogin();
-    const registerModal = await this.modalCtrl.create({
-      component: RegisterPage
-    });
-    return await registerModal.present();
+    this.navCtrl.navigateRoot('/register');
   }
 
-  /*função para pegar o form*/
   login(form: NgForm) {
     this.authService.login(form.value.email, form.value.password).subscribe(
       data => {
@@ -49,7 +41,6 @@ export class LoginPage implements OnInit {
         this.alertService.presentToast('E-mail ou senha incorretos');
       },
       () => {
-        this.dismissLogin();
         this.navCtrl.navigateRoot('/dashboard');
       }
     );

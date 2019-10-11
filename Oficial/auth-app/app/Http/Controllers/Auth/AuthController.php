@@ -247,9 +247,7 @@ class AuthController extends Controller
         if($listaInfo != null)
             return response()->json($listaInfo);
         else
-            return response()->json([
-                'message' => 'Lista de presenca não marcada!'
-            ], 201);
+            return response()->json(" ");
     }
 
     public function getreuniao(){

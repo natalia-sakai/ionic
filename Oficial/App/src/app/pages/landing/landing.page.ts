@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LandingPage implements OnInit {
   constructor(
-    private modalController: ModalController,
     private menu: MenuController,
     private authService: AuthService,
     private navCtrl: NavController,
@@ -37,16 +36,10 @@ export class LandingPage implements OnInit {
   /*ao clicar nos botoes de login ou register é construido um modal 
     o modal é composto pelas páginas já prontas de login e register
   */
-  async register() {
-    const registerModal = await this.modalController.create({
-      component: RegisterPage
-    });
-    return await registerModal.present();
+  register() {
+    this.navCtrl.navigateRoot('/register');
   }
-  async login() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
+  login() {
+    this.navCtrl.navigateRoot('/login');
   }
 }

@@ -1,7 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { AlertService } from './../../../services/alert.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,13 +13,13 @@ export class EditsenhaPage implements OnInit {
 
   public id: any;
   public password: any;
-  constructor(private modalCtrl: ModalController, private alertService: AlertService, private authService: AuthService) { }
+  constructor(private alertService: AlertService, private authService: AuthService, private navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
   dismiss() {
-    this.modalCtrl.dismiss();
+    this.navCtrl.navigateRoot('/account');
   }
 
   editar(form: NgForm)
@@ -43,11 +43,13 @@ export class EditsenhaPage implements OnInit {
         },
         () => {
           this.alertService.presentToast('Senha atualizada!');
+          this.navCtrl.navigateRoot('/account');
         }
       );
     }
     , error=>{ 
       console.log("error: " + error);
     });
+
   }
 }
