@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/alert.service';
 import { HttpClient, HttpHeaders,HttpHandler } from '@angular/common/http';
 import { Injectable, ErrorHandler } from '@angular/core';
 import { tap, catchError,retry } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { EnvService } from './env.service';
 import { User } from '../models/user';
 import { Response } from 'selenium-webdriver/http';
 import { Observable, of, throwError, Observer } from 'rxjs';
+import { StringifyOptions } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +19,16 @@ export class AuthService {
   */
 
   //variaveis
-  a="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVjNDkzYjhmM2I0ZjE4ODVhY2VlOTNjY2QwODMxODkyYWIwNWU0ODZhZDM1NTk2M2QzZmM1ZWJmY2UwMzJiMmRhMTgxNTU2ZWVlM2FjOTEyIn0.eyJhdWQiOiIyIiwianRpIjoiNWM0OTNiOGYzYjRmMTg4NWFjZWU5M2NjZDA4MzE4OTJhYjA1ZTQ4NmFkMzU1OTYzZDNmYzVlYmZjZTAzMmIyZGExODE1NTZlZWUzYWM5MTIiLCJpYXQiOjE1Njk1MTU0NjgsIm5iZiI6MTU2OTUxNTQ2OCwiZXhwIjoxNjAxMTM3ODY4LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.otkEbkF7QavXOxu2h8V0TcQ605TbdtyWhEyvDF5GfyH8jXOti_tp74Hf4TW_-wfVDuGO7fE_Bszpe1MPE0TEQ0QTm3CAUZtifoX4gLy4ELtcRJZrocBG9EN3oGv0iYTsQi_6-hL6jP88acc-42kJ0I0AuKndx-4P7afvZu5cYJv0Em05crX4Wy-y_uDDKnT0QXuwJ9SDtTeEADJu353E88hH-n6hL_xQp2ENDcuA-OTuMrfNVALPJbrUhTcBSIM8iAUKXAlxKUVarbULi3QKpicahnIKbjm53TxdO30i5t03ESlK8-jll-sP_GeQgFBIJRkQ7T7ez35on3lnDgLw4z8aVR9BICMYxHZcIGsXwtpWkNdkHFRblkQFRhq5Ek9kUfUvEWhiE0T44EVCNFWSCgAcsmHBB2GZ0FMlBGaZJgPQ3gSTDLAvyZHsPx-rHDccMDZbiFkk2v141Gjue_6QtaOMOD_YNOX0QzLsdRDduHNxPBD7CRnWzcTuNxxvWVVD-3iezZPM8XOqznbAsEwUOd4muXG0bYVr8zbh7bNs0zNSnFrOcXzMksWIIs3s4olKoC3IQv9NqKeB5NFp52832YxI9DmEpDrW46CUoGrh8-cwr9AOmiGPviQKiIn6sv0_noVt77hrBPBZdGIuXyY0aEZ9Lx9JuVcOSAD1JObH_bw";
+  a="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjA5NjE0NjgxODdiZGJkNTg1OTJlYmYyMWRjZTI5ZTgwM2RmMzg4Mzk1Y2QwNzRlOWM5ZjQ1MTMwYTBkZWI3OTQ4ZjJlNTE2YzJhMjI0NTQyIn0.eyJhdWQiOiIyIiwianRpIjoiMDk2MTQ2ODE4N2JkYmQ1ODU5MmViZjIxZGNlMjllODAzZGYzODgzOTVjZDA3NGU5YzlmNDUxMzBhMGRlYjc5NDhmMmU1MTZjMmEyMjQ1NDIiLCJpYXQiOjE1Njk5NDU0ODgsIm5iZiI6MTU2OTk0NTQ4OCwiZXhwIjoxNjAxNTY3ODg3LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.xT5GuolQm-B-W_3u6XfQpdS7cObPaXC2ZAsC8g74xHtT7Q388QkZd_USe0JbqWxmqxW5niqdnhWbPbnxxsDTdZT8rwPGz614LEQRI31Ry1g3qbfBSUjSwDAXD6q6z9iXGtAI4Dl7rodGNGrDFSWg_R6HC_Cy2y6s91cyc50hf_TX3b4bQXm7c7iK4fgxN-9RckA2-_RVU2X151p7CgPvKZABmyFa70c4G_vlz9UiRW17EoHZ_nH5EwW9zl4XWnPYlO6OuuYetEAc2CGAvf7IyuAUAzv-jdu9zR8s1DATx3VUviAYUiaFSrlGtG2xvqnBJpRpmGjZ33yJW4xL88dPi5lHvwQv69SfPeSuuvStq35PwXRGzifVwS5gjsMLqMGQhGDa67h9ZtRC5WnXKiWvtFnoG78Go7d0QvinM3zHBP7aFMZaGMiJ2ls6lc85RxXOrtGV984GkG0C3Gke1kTg7ie949j3V6x237-95Tk00divzE9la4VJahpnjvV_gYaruPJ8J3heUy5a7msxpYzhMYJ6RF0hOPbH1WGpHxP4HRPCmJNfFOnRALWneXWP9l-gktKPzi0j56Jt6ZYga4XqPtM8o5FD6E7BpsDb_GLlJAaLC-hJx2g_QrsXgkm3FAPbUeklSbm9YT9hhxj5TEw6Su5M3LQyUO8NGlF4ItsBowU";
   isLoggedIn = false;
-  token:any;
-  id:any;
+  public token:any;
+  public id:any;
   public date:any;
   public info:any
   public ordem:any;
-
+  public endereco:any;
+  public cidade:any;
+  public estado:any;
   auxtoken: any;
   auxid: any;
 
@@ -33,7 +37,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private storagenative: NativeStorage,
-    private env: EnvService
+    private env: EnvService, 
+    private alertctrl : AlertService
   ) { }
   
   /*
@@ -42,6 +47,14 @@ export class AuthService {
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     */
+
+   /* this.native.setItem('nome', dado);
+      this.native.getItem('nome').then(
+        data=>{
+
+        }
+      )
+   */
 
   handleError(error) {
     let errorMessage = '';
@@ -54,7 +67,8 @@ export class AuthService {
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
-    }
+  
+  }
 
   login(email: String, password: String) {
     return this.http.post(this.env.API_URL + 'auth/login', 
@@ -70,6 +84,13 @@ export class AuthService {
         );
         this.token = access_token;
         this.isLoggedIn = true;
+        console.log('access_token informations');
+        console.log(access_token);
+        console.log(this.token);
+        console.log(access_token);
+
+        console.log(this.token["access_token"]);
+        this.handletoken();
         return access_token;
       }),
       tap(id =>{
@@ -81,21 +102,40 @@ export class AuthService {
           error => console.error('Erro ao armazenar o ID', error)
         );
         this.id = JSON.stringify(id);
+        console.log('id');
+        console.log(id);
+        console.log(this.id);
         return this.id;
       })
     );
   }
 
-  register(fName: String, lName: String, email: String, password: String, type: Number) {
+  handletoken()
+  {
+    console.log('handletoken');
+    console.log(this.token);
+    console.log(this.token["token_type"]);
+    console.log(this.token["access_token"]);
+  }
+  
+  register(fName: String, lName: String, email: String, password: String,data_nasc: Date, cargo_id: Number, avental_id:Number, telefone: Number, endereco: String, cidade: String, estado: String) {
     return this.http.post(this.env.API_URL + 'auth/register',
-      {fName: fName, lName: lName, email: email, password: password, type: type}
-    )
+    {
+      fName: fName, lName: lName, 
+      email: email, password: password, 
+      endereco: endereco, cidade: cidade, 
+      estado: estado, data_nasc: data_nasc, 
+      cargo_id: cargo_id, avental_id:avental_id, telefone:telefone
+    }).pipe(
+      retry(1),
+      catchError(this.handleError)
+    ); 
   }
 
   logout() {
     //token de acesso teste
-    let headers = new HttpHeaders({
-      'Authorization': this.a
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
     .pipe(
@@ -110,8 +150,8 @@ export class AuthService {
 
   user() {
     //token de acesso teste
-    let headers = new HttpHeaders({
-      'Authorization': this.a
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
     .pipe(
@@ -120,9 +160,9 @@ export class AuthService {
     ); 
   }
   
-  updateuser(id: Number,fName: String, lName: String, email: String) {
+  updateuser(id: Number,fName: String, lName: String, email: String, endereco: String, cidade: String, estado: String, data_nasc: String, telefone: Number) {
     return this.http.put(this.env.API_URL + 'auth/updateuser',
-      {id_user: id, fName: fName, lName: lName, email: email}
+      {id_user: id, fName: fName, lName: lName, email: email, endereco: endereco, cidade: cidade, estado: estado,data_nasc: data_nasc, telefone: telefone}
     )
   }
 
@@ -131,6 +171,7 @@ export class AuthService {
     {id_user: id, password: password}
     )
   }
+
   checkpassword(id: Number, password: String)
   {
     return this.http.post(this.env.API_URL + 'auth/checkpassword',
@@ -144,8 +185,8 @@ export class AuthService {
   getId(): Observable<any>
   {
     //token de acesso teste
-    let headers = new HttpHeaders({
-      'Authorization': this.a
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     return this.http.get<any>(this.env.API_URL + 'auth/user', { headers: headers })
     .pipe(
@@ -161,28 +202,28 @@ export class AuthService {
         if(this.token != null) {
           this.isLoggedIn=true;
         } else {
-          //this.isLoggedIn=false;
-          this.isLoggedIn=true; //teste
+          this.isLoggedIn=false;
+          //this.isLoggedIn=true; //teste
         }
       },
       error => {
         this.token = null;
-        //this.isLoggedIn=false; //--> é esse
-        this.isLoggedIn=true; //-->teste
+        this.isLoggedIn=false; //--> é esse
+        //this.isLoggedIn=true; //-->teste  
       }
     );
   }
 
- getReuniao(): Observable<any> {
-  let headers = new HttpHeaders({
-    'Authorization': this.a
-  });
-  return this.http.get<any>( this.env.API_URL+'auth/getreuniao',{ headers: headers })
-  .pipe(
-  retry(1),
-  catchError(this.handleError)
-  ); 
- }
+  getReuniao(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    });
+    return this.http.get<any>( this.env.API_URL+'auth/getreuniao',{ headers: headers })
+    .pipe(
+    retry(1),
+    catchError(this.handleError)
+    ); 
+  }
 
   confirma_presenca(id_user: Number, resp: Number, motivo: String)
   {
@@ -191,20 +232,20 @@ export class AuthService {
     );
   }
 
-  get_presenca(): Observable<any>
+  getLista(): Observable<any>
   {
-    let headers = new HttpHeaders({
-      'Authorization': this.a
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     return this.http.get<any>( this.env.API_URL+'auth/getlista',{ headers: headers }); 
   }
 
-  getinfo(): Observable<any>
+  getInfo(): Observable<any>
   {
     return this.http.get<any>( this.env.API_URL+'auth/getinfo');
   }
 
-  getordem(): Observable<any>
+  getOrdem(): Observable<any>
   {
     return this.http.get<any>( this.env.API_URL+'auth/getordem');  
   }

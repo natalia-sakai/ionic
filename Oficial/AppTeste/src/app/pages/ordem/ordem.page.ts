@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdemPage implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
+    this.showordem();
   }
 
+  public ordem: any;
+  
+  async showordem() {
+    await this.authService.getOrdem().subscribe(
+      data=>{
+        this.ordem = data;
+        this.handleordem();
+    },
+    error=>{
+      console.log(error);
+    });
+    console.log("aqui");
+  }
+
+  handleordem()
+  {
+    this.ordem;
+  }
 }

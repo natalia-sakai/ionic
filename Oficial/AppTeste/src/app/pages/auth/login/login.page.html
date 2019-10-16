@@ -13,7 +13,7 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 15px">
-      <ion-input ngModel type="password" name="password" placeholder="Password" required="true"></ion-input>
+      <ion-input ngModel type="password" name="password" placeholder="Password" pattern="[a-z0-9._%+-]{6,}$" required="true"></ion-input>
     </ion-item>
     <ion-grid text-right>
         <ion-button fill='clear' size='small' style="color:white">Forgot Password?</ion-button>

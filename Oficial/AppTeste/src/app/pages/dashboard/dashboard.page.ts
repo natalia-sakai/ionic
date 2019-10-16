@@ -31,19 +31,23 @@ export class DashboardPage implements OnInit {
   public motivo: any;
   public ordem: any[] = [];
   public info: any[] = [];
-  constructor(private navCtrl:NavController, private authService: AuthService, private alertService: AlertService,private http: HttpClient,private env: EnvService, private route: ActivatedRoute) { 
+
+  constructor(private navCtrl:NavController, private authService: AuthService, 
+    private alertService: AlertService,private http: HttpClient,
+    private env: EnvService, private route: ActivatedRoute,
+    private alertCtrl: AlertController
+  ) { 
   }
   ngOnInit() {
     this.showdata();
     this.showordem();
     this.showinfo();
+    this.verifica();
   }
-
-  //mostrar qual o usuario tinha marcado!! -> disable only one button
-
-  //verifica se o usuario ja respondeu
+  
   async verifica(){ 
-    this.authService.get_presenca().subscribe(
+    //verifica se o usuario ja respondeu
+    await this.authService.getLista().subscribe(
       resp => {
         //verifica se esta vazio, se tiver permite q o usuario escolha a opcao
         if(JSON.stringify(resp)=="{}")
@@ -57,13 +61,11 @@ export class DashboardPage implements OnInit {
           {
             this.p1 = "success";
             this.p2 = "danger";
-            this.disabled1 = true;
           }
           else if(JSON.stringify(resp.presenca) == '0')
           {
             this.p2 = "success";
             this.p1 = "primary";
-            this.disabled2 = true;
           }
         }
         //se ja tiver algum motivo
@@ -78,19 +80,22 @@ export class DashboardPage implements OnInit {
           
       },
       error => {
-        console.log(error);
+        //se nao possui o id no banco de dados, deixa habilitado para o usuario
+        this.disabled1=false;
+        this.disabled2=false;
       }
     );
   }
-  //mostra a data se tiver
+  
   async showdata()
   {
-    this.authService.getReuniao()
+    //mostra a data se tiver
+    await this.authService.getReuniao()
     .subscribe(
     data=>{ 
       this.data_r = data;
       //se tiver reunião habilita
-      if(this.data_r != null)
+      if(this.data_r != null || this.data_r !== undefined)
       {
         this.havedata=true;
         this.verifica();
@@ -101,20 +106,56 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  resposta(resp: Number)
+  async resposta(resp: Number)
   {
     this.opcao = resp;
+    if(this.opcao == 0)
+    {
+      this.disabled3 = false;
+      this.bmotivo(this.opcao);
+    }
+    else{
+      this.motivo = "-";
+      this.lista(this.opcao, this.motivo)
+    }
+    await this.verifica();
   }
 
-  bmotivo()
+  async bmotivo(opcao: Number)
   {
     //abre um pop
-    
+    let alertPrompt = await this.alertCtrl.create({
+      header: 'Informe o motivo',
+      inputs: [
+        {
+          name: 'motivo',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role:'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Enviar',
+          handler: (data)=> {
+            if(data.motivo == "")
+              this.motivo = "Sem justificativa";
+            else
+              this.motivo = data.motivo;
+            this.lista(this.opcao,this.motivo);
+          }
+        }
+      ]
+    });
+    await alertPrompt.present();
   }
 
-  lista()
+  async lista(opcao: Number, motivo: String)
   {
-    this.authService.getId()
+    await this.authService.getId()
       .subscribe(
       data=>{ 
         this.id = data.id;
@@ -134,7 +175,7 @@ export class DashboardPage implements OnInit {
       , error=>{ 
         console.log("error: " + error);
       });
-      this.verifica();
+      await this.verifica();
   }
   editar()
   {
@@ -142,9 +183,9 @@ export class DashboardPage implements OnInit {
     this.disabled2 = false;
   }
 
-  showordem()
+  async showordem()
   {
-    this.authService.getordem()
+    await this.authService.getOrdem()
     .subscribe(
       data =>{
         this.ordem = data;
@@ -158,9 +199,9 @@ export class DashboardPage implements OnInit {
     );
   }
   
-  showinfo()
+  async showinfo()
   {
-    this.authService.getinfo()
+    await this.authService.getInfo()
     .subscribe(
       data =>{
         this.info = data;

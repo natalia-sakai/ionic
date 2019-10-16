@@ -5,30 +5,52 @@
     </ion-button>
   <form #form="ngForm" (ngSubmit)="register(form)" method="POST">
     <ion-item style="border-radius: 15px">
-        <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[a-z\s]+$" required="true"></ion-input>
+        <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 15px">
-      <ion-input ngModel name="lName" placeholder="Last Name" type="text" pattern="[a-z\s]+$" required="true"></ion-input>
+      <ion-input ngModel name="lName" placeholder="Last Name" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 15px">
-      <ion-input type="email" ngModel name="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true"></ion-input>
+      <ion-input type="email" ngModel name="email" placeholder="E-mail" pattern="[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(\.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\.[-a-zA-Z0-9_]+)*\.([cC][oO][mM]))(:[0-9]{1,5})?" required="true"></ion-input>
     </ion-item>
     <br>
-    <ion-select placeHolder="Selecione o cargo" ngModel name="tipo" required="true">
-      <ion-select-option  value="2">{{this.cargos}}</ion-select-option>
+    <ion-item style="border-radius: 15px">
+      <ion-input type="tel" ngModel name="telefone" placeholder="Telefone" required="true" pattern="[0-9.-]{8,9}$"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel name="endereco" placeholder="Endereço" type="text" pattern="[A-Za-z0-9\s]+" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel name="cidade" placeholder="Cidade" type="text" pattern="[A-Za-z\s]+" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-select placeHolder="Selecione o estado" ngModel name="estado" required="true" >
+      <ion-select-option *ngFor="let uf of ufs" value="{{uf}}">{{uf}}</ion-select-option>
+    </ion-select>
+    <br>
+    <ion-datetime ngModel name="data_nasc" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required="true"></ion-datetime>
+    <br>
+    <ion-select placeHolder="Selecione o cargo" ngModel name="cargo" required="true">
+      <ion-select-option  value="1">1</ion-select-option>
+    </ion-select>
+    <br>
+    <ion-select placeHolder="Selecione o avental" ngModel name="avental" required="true">
+      <ion-select-option  value="1">1</ion-select-option>
     </ion-select>
     <br>
     <ion-item style="border-radius: 15px">
-      <ion-input type="password" ngModel name="password" placeholder="Password" required="true"></ion-input>
+      <ion-input type="password" ngModel name="password" placeholder="Password" pattern="[a-z0-9._%+-]{6,}$" required="true"title="Minimo 6 caracteres"></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 15px">
-      <ion-input type="password" ngModel name="password_s" placeholder="Confirm password" required="true"></ion-input>
+      <ion-input type="password" ngModel name="password_s" placeholder="Confirm password" pattern="[a-z0-9._%+-]{6,}$" required="true"></ion-input>
     </ion-item>
     <br>
-    <ion-button type="submit" round expand="block" color="danger">Register</ion-button>
+    <ion-button type="submit" round expand="block" color="danger" disabled="false">Register</ion-button>
   </form>
   <p text-center style="color:white">Already have a account?</p>
   <ion-button round expand="block" color="primary" (click)="loginModal()">Login</ion-button>

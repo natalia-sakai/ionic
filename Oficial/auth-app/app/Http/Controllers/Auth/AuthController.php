@@ -82,15 +82,13 @@ class AuthController extends Controller
 
     public function ordem(Request $request){
         $request->validate([
-            'id_user' => 'required|int',
-            'ordem' => 'required|string',
-            'ativo' => 'required|int'
+            'ordem' => 'required|string'
         ]);
 
         $ordem = new Ordem;
         $ordem  -> id_user = $request->id_user;
         $ordem  -> ordem = $request->ordem;
-        $ordem  -> ativo = $request->ativo;
+        $ordem  -> ativo = 1;
         $ordem ->save();
     
         return response()->json([
@@ -100,15 +98,14 @@ class AuthController extends Controller
 
     public function informativo(Request $request){
         $request->validate([
-            'id_user' => 'required|int',
             'info' => 'required|string',
-            'ativo' => 'required|int',
             'permissao' => 'required|int'
         ]);
+        
         $info = new Info;
         $info  -> id_user = $request->id_user;
         $info  -> info = $request->info;
-        $info  -> ativo = $request->ativo;
+        $info  -> ativo = 1;
         $info  -> permissao = $request->permissao;
         $info ->save();
     
@@ -132,7 +129,7 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
-        /*para o login é preciso criar o token, no caso do pc precisa fazer:
+        /*para o login é preciso criar o token, precisa fazer:
         php artisan passport:install que ele dará um token e add no banco sozinho
         */
         $request->validate([
@@ -165,9 +162,14 @@ class AuthController extends Controller
     
     public function logout(Request $request){
         $request->user()->token()->revoke();
-        return response()->json([
-            'message' => 'Logged out feito com sucesso!'
-        ]);
+        if($request == null)
+            return response()->json([
+                'message' => 'Logout falhou!'
+            ]);
+        else
+            return response()->json([
+            'message' => 'Logout feito com sucesso!'
+            ]);
     }
     //validacao
     public function checkpassword(Request $request){
@@ -203,9 +205,18 @@ class AuthController extends Controller
             'id_user'=> 'required|int',
             'fName' => 'required|string',
             'lName' => 'required|string',
-            'email' => 'required|string|email'
+            'email' => 'required|string|email',
+            'endereco' => 'required|string',
+            'cidade' => 'required|string',
+            'estado' => 'required|string',
+            'data_nasc' => 'required|date',
+            'telefone' => 'required|string'
         ]);
-        User::where('id', $request->id_user)->update(['first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email]);
+        User::where('id', $request->id_user)->update([
+            'first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email,
+            'endereco' => $request->endereco, 'cidade'=> $request->cidade, 'estado'=>$request->estado,
+            'data_nasc'=>$request->data_nasc, 'telefone'=>$request->telefone
+        ]);
 
         return response()->json([
             'message' => 'Usuário Atualizado!'
@@ -225,13 +236,44 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function updateinfo(Request $request){
+        $request->validate([
+            'id'=>'required|int',
+            'info'=>'required|string',
+            'ativo'=>'required|int'
+        ]);
+        Info::where('id', $request->id)->update(['info'=>$request->info, 'ativo'=>$request->ativo]);
+        return response()->json([
+            'message' => 'Informativo Atualizado!'
+        ], 201);
+    }
+
+    public function updateordem(Request $request){
+        $request->validate([
+            'id'=>'required|int',
+            'ordem'=>'required|string',
+            'ativo'=>'required|int'
+        ]);
+        Ordem::where('id', $request->id)->update(['ordem'=>$request->ordem, 'ativo'=>$request->ativo]);
+        return response()->json([
+            'message' => 'Ordem Atualizada!'
+        ], 201);
+    }
+
+    public function getusers(Request $request){
+        $request->validate([
+            'id_user'=>'required|int'
+        ]);
+        $resp = User::select('first_name', 'last_name')->where('id', $request->id_user)->get();
+        return response()->json($resp);
+    }
+
     public function getlista(){
-        $userInfo=Auth::user();
-        $id = $userInfo->id;
-        //pega o primeiro q tiver o id (q é unico)
-        $listaInfo = ListaPresenca::where('id_user', $id)->first();
-        //se tiver a info no bd
+        $listaInfo = ListaPresenca::select('id_user', 'presenca', 'motivo')->get();
+        if($listaInfo != null)
             return response()->json($listaInfo);
+        else
+            return response()->json(" ");
     }
 
     public function getreuniao(){
@@ -243,14 +285,25 @@ class AuthController extends Controller
     
     public function getinfo(){
         //recebe do bd o valor 
-        $infoInfo=Info::where('ativo', '1')->pluck('info');
+        $infoInfo=Info::where('ativo', '1')->get();
+        
+        return response()->json($infoInfo);
+    }
+
+    public function getallinfo(){
+        //recebe do bd o valor 
+        $infoInfo=Info::get();
         
         return response()->json($infoInfo);
     }
 
     public function getordem(){
-        //recebe do bd o valor 
-        $ordemInfo=Ordem::where('ativo', '1')->pluck('ordem');
+        $ordemInfo=Ordem::where('ativo', '1')->get();
+        return response()->json($ordemInfo);
+    }
+
+    public function getallordem(){
+        $ordemInfo=Ordem::get();
         return response()->json($ordemInfo);
     }
 

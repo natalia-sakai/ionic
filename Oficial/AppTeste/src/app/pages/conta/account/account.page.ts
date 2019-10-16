@@ -15,7 +15,11 @@ export class AccountPage implements OnInit {
   lname:any;
   fname:any;
   email: any;
-
+  endereco: any;
+  cidade: any;
+  estado: any
+  telefone: any;
+  data_nasc: any;
   constructor(private authService : AuthService, private modalController: ModalController) {
    }
 
@@ -23,14 +27,19 @@ export class AccountPage implements OnInit {
     this.showuser();
   }
   
-  showuser()
+  async showuser()
   {
-    this.authService.user()
+    await this.authService.user()
     .subscribe(
     data=>{ 
       this.fname = data.first_name.replace("\"", "");
       this.lname = data.last_name.replace("\"", "");
       this.email = data.email.replace("\"", "");
+      this.endereco = data.endereco.replace("\"", "");
+      this.cidade = data.cidade.replace("\"", "");
+      this.estado = data.estado.replace("\"", "");
+      this.telefone = data.telefone.replace("\"", "");
+      this.data_nasc = data.data_nasc.replace("\"", "");
     }
     , error=>{ 
       console.log("error: " + error);

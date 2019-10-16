@@ -1,0 +1,28 @@
+<ion-content padding>
+  <ion-button fill='clear' (click)="landing()" style="color: white">
+    <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+    Back
+  </ion-button>
+  <ion-grid text-center>
+      <img  src="\assets\user.png" >
+  </ion-grid> 
+  <br>
+  <form #form="ngForm" (ngSubmit)="login(form)" method="POST">
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel type="email" name="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 15px">
+      <ion-input ngModel type="password" name="password" placeholder="Password" pattern="[a-z0-9._%+-]{6,}$" required="true"></ion-input>
+    </ion-item>
+    <ion-grid text-right>
+        <ion-button fill='clear' size='small' style="color:white">Forgot Password?</ion-button>
+    </ion-grid>
+    <br>
+    <ion-button type="submit" round expand="block" color="primary">Login</ion-button>
+
+  </form>
+  
+  <p text-center style="color: white">Don't have a account?</p>
+  <ion-button round expand="block" color="danger" (click)="registerModal()">Register</ion-button>
+</ion-content>

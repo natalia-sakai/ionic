@@ -10,12 +10,16 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-          <ion-button fill="clear" size="large" [routerLink]="['/presenca']" text-left>
+          <ion-button fill="clear" size="large" [routerLink]="['/presenca']">
           LISTA DE PRESENÇA
           </ion-button>
       </ion-card-title>
-      <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r|date: "dd/MM"}} ?</ion-card-subtitle>
-      <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada...</ion-card-subtitle>
+      <ion-list lines="none">
+        <ion-item>
+            <ion-card-subtitle *ngIf="havedata==false">Sem nenhuma reunião agendada...</ion-card-subtitle>
+            <ion-card-subtitle *ngIf="havedata==true">Comparecerá na reunião do dia {{this.data_r|date: "dd/MM"}} ?</ion-card-subtitle>
+        </ion-item>
+      </ion-list>
     </ion-card-header>
     <ion-card-content style="padding-left: 35px">
           <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
@@ -34,14 +38,12 @@
           </ion-button>
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content style="padding-left: 35px">
-        <ion-list lines="none">
-            <ion-item no-lines>
-              <ion-label text-uppercase text-wrap>
-                {{this.info}}
-              </ion-label>
-            </ion-item>
-        </ion-list>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let inform of info">
+          <ion-label text-uppercase>{{inform}}</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
@@ -52,7 +54,7 @@
           </ion-button>
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content style="padding-left: 35px">
+    <ion-card-content style="padding-left: 15px">
         
     </ion-card-content>
   </ion-card>
@@ -64,14 +66,12 @@
           </ion-button>
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content style="padding-left: 35px">
-        <ion-list lines="none">
-            <ion-item no-lines>
-              <ion-label text-uppercase text-wrap>
-                {{this.ordem}}
-              </ion-label>
-            </ion-item>
-        </ion-list>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let ordens of ordem">
+          <ion-label text-uppercase>{{ordens}}</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
@@ -82,7 +82,7 @@
           </ion-button>
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content style="padding-left: 35px">
+    <ion-card-content style="padding-left: 30px">
       <h3>
           Verifique a situação financeira
       </h3>
