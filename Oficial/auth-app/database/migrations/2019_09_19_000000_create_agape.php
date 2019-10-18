@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdem extends Migration
+class CreateAgape extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOrdem extends Migration
      */
     public function up()
     {
-        Schema::create('ordem', function (Blueprint $table) {
+        Schema::create('agapes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ordem'); 
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('nivel');
-            $table->ativo('ativo');
+            $table->string('agape');
+            $table->integer('ativo');
+            $table->timestamp('data')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
@@ -32,6 +32,6 @@ class CreateOrdem extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordem');
+        Schema::dropIfExists('agapes');
     }
 }
