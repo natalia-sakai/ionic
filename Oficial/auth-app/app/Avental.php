@@ -3,17 +3,18 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\ListaPresenca as Authenticatable;
-class ListaPresenca extends Authenticatable
+use Illuminate\Foundation\Auth\avental as Authenticatable;
+class Avental extends Authenticatable
 {
     use HasApiTokens, Notifiable;
+    protected $table = 'avental';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id_user','presenca','motivo', 'reuniao'
+        'avental'
     ];
     /**
      * The attributes that should be hidden for arrays.

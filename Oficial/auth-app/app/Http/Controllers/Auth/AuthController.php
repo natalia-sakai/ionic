@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use App\Agape;
+use App\Avental;
 use App\Cargos;
+use App\Events\CreateReuniao;
 use App\User;
 use App\ListaPresenca;
 use App\Reuniao;
@@ -61,7 +64,7 @@ class AuthController extends Controller
         ]);
         $lista = ListaPresenca::where('id_user', $request->id_user)->first();
         if($lista != null){
-            $presenca = ListaPresenca::where('id_user', $request->id_user)->update(['presenca'=> $request->presenca, 'motivo'=>$request->motivo]);
+            ListaPresenca::where('id_user', $request->id_user)->update(['presenca'=> $request->presenca, 'motivo'=>$request->motivo]);
             return response()->json([
                 'message' => 'Lista Atualizada!'
             ], 201);
@@ -82,12 +85,15 @@ class AuthController extends Controller
 
     public function ordem(Request $request){
         $request->validate([
-            'ordem' => 'required|string'
+            'ordem' => 'required|string',
+            'id_user' => 'required|int',
+            'nivel' => 'required|int'
         ]);
 
         $ordem = new Ordem;
         $ordem  -> id_user = $request->id_user;
         $ordem  -> ordem = $request->ordem;
+        $ordem  -> nivel = $request->nivel;
         $ordem  -> ativo = 1;
         $ordem ->save();
     
@@ -99,7 +105,8 @@ class AuthController extends Controller
     public function informativo(Request $request){
         $request->validate([
             'info' => 'required|string',
-            'permissao' => 'required|int'
+            'permissao' => 'required|int',
+            'id_user' => 'required|int'
         ]);
         
         $info = new Info;
@@ -115,17 +122,95 @@ class AuthController extends Controller
         
     }
 
-    public function reuniao(Request $request){
+    public function agape(Request $request){
         $request->validate([
-            'data' => 'required|date',
-            'ativo' => 'number'
+            'date' => 'required|string',
+            'id_user' => 'required|int',
+            'agape'=> 'required|string'
         ]);
-        $reuniao = new Reuniao;
-        $reuniao -> data = $request->data;
-        $reuniao->save();
+        $agape = new Agape;
+        $aux = $request->date;
+        $data = strtotime($aux);
+        $agape -> data = date('Y-m-d', $data);
+        $agape -> id_user = $request->id_user;
+        $agape -> agape = $request->agape;
+        $agape -> ativo = 1;
+        $agape->save();
         return response()->json([
-            'message' => 'Reuniao criada!'
+            'message' => 'Ágape criada!'
         ], 201);
+    }
+
+    public function createreuniao($day){
+        Carbon::setLocale('pt_BR');
+        //pega a data atual
+        $now =Carbon::now();
+        //transforma em data
+        $now = strtotime($now);
+        $string = "+".$day." day";
+        //soma a qtde de dias
+        $data = strtotime($string, $now);
+        //configura o formato
+        $resul = date('Y-m-d', $data);
+        //desativa reuniao antiga toda terça
+        if($day == 6)
+        {
+            //pega a data do dia anterior
+            $aux = strtotime("-1 day", $now);
+            $antiga= date('Y-m-d', $aux);
+            Reuniao::where('data',$antiga)->update(['ativo'=> 0]);
+            return response()->json([
+                'message' => 'Reuniao antiga desativada!'
+            ], 201);
+        }
+        
+        //verifica se ja tem uma reuniao nesse dia
+        $verifica = Reuniao::where('data', $resul)->first();
+        //se nao tiver
+        if($verifica == null)
+        {
+            $reuniao = new Reuniao;
+            $reuniao->data = $resul;
+            $reuniao->ativo=1;
+            $reuniao->save();
+            return response()->json([
+                'message' => 'Reuniao criada!'
+            ], 201);
+        }
+        else{
+            return response()->json([
+                'message' => 'Reuniao já marcada!'
+            ], 201);
+        }
+        
+    }
+    public function reuniao(){
+        //pega o dia da semana
+        $atual = date('w');
+        switch($atual){
+            case 1: //segunda
+                return $this->createreuniao(0);
+                break;
+            case 2:
+                return $this->createreuniao(6);
+                break;
+            case 3:
+                return $this->createreuniao(5);
+                break;
+            case 4:
+                return $this->createreuniao(4);
+                break;
+            case 5:
+                return $this->createreuniao(3);
+                break;
+            case 6:
+                return $this->createreuniao(2);
+                break;
+            case 0: //domingo
+                return $this->createreuniao(1);
+                break;
+        }
+        
     }
 
     public function login(Request $request) {
@@ -260,16 +345,44 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function updateagape(Request $request){
+        $request->validate([
+            'id'=>'required|int',
+            'agape'=>'required|string',
+            'ativo'=>'required|int',
+            'date'=>'required|string'
+        ]);
+        $data = strtotime($request->date);
+        $resul= date('Y-m-d', $data);
+        Agape::where('id', $request->id)->update(['agape'=>$request->agape, 'ativo'=>$request->ativo, 'data'=>$resul]);
+        return response()->json([
+            'message' => 'Ágape Atualizada!'
+        ], 201);
+    }
+
     public function getusers(Request $request){
         $request->validate([
             'id_user'=>'required|int'
         ]);
-        $resp = User::select('first_name', 'last_name')->where('id', $request->id_user)->get();
+        $resp = User::where('id', $request->id_user)->get();
         return response()->json($resp);
     }
 
     public function getlista(){
-        $listaInfo = ListaPresenca::select('id_user', 'presenca', 'motivo')->get();
+        $reuniaoInfo=Reuniao::where('ativo', '1')->value('id'); 
+        $listaInfo = ListaPresenca::where('reuniao', $reuniaoInfo)->get();
+        if($listaInfo != null)
+            return response()->json($listaInfo);
+        else
+            return response()->json(" ");
+    }
+
+    public function getalllista(Request $request)
+    {
+        $request->validate([
+            'id'=>'required|int'
+        ]);
+        $listaInfo = ListaPresenca::where('reuniao', $request->id)->get();
         if($listaInfo != null)
             return response()->json($listaInfo);
         else
@@ -279,6 +392,13 @@ class AuthController extends Controller
     public function getreuniao(){
         //recebe do bd o valor 
         $reuniaoInfo=Reuniao::where('ativo', '1')->value('data');
+        
+        return response()->json($reuniaoInfo);
+    }
+
+    public function getallreuniao(){
+        //recebe do bd o valor 
+        $reuniaoInfo=Reuniao::where('ativo', '0')->get();
         
         return response()->json($reuniaoInfo);
     }
@@ -308,7 +428,24 @@ class AuthController extends Controller
     }
 
     public function getcargos(){
-        $cargoInfo=Cargos::pluck('cargo');
+        $cargoInfo=Cargos::get();
         return response()->json($cargoInfo);
+    }
+
+    public function getagape(){
+        $info=Agape::where('ativo', '1')->get();
+        
+        return response()->json($info);
+    }
+
+    public function getallagape(){
+        $info=Agape::get();
+        
+        return response()->json($info);
+    }
+    public function getavental(){
+        $info=Avental::get();
+        
+        return response()->json($info);
     }
 }

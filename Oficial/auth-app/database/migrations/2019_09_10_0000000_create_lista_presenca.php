@@ -17,6 +17,8 @@ class CreateListaPresenca extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('reuniao')->unsigned();
+            $table->foreign('reuniao')->references('id')->on('reuniao')->onDelete('cascade');
             $table->integer('presenca');
             $table->string('motivo');
             $table->timestamp('created_at')->nullable();
